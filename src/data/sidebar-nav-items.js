@@ -22,8 +22,8 @@ export default function() {
       to: "/components-overview",
     },
     {
-      title: "Tables",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
+      title: "Data Pasal",
+      htmlBefore: '<i class="material-icons">book</i>',
       to: "/tables",
     },
     {
@@ -32,8 +32,8 @@ export default function() {
       to: "/user-profile-lite",
     },
     {
-      title: "Errors",
-      htmlBefore: '<i class="material-icons">error</i>',
+      title: "Data Siswa",
+      htmlBefore: '<i class="material-icons">person</i>',
       to: "/errors",
     }
   ];
