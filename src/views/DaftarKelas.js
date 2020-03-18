@@ -1,214 +1,70 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody,Button,InputGroupAddon } from "shards-react";
+import PageTitle from "../components/common/PageTitle";
+import axios from 'axios';
 
 class DaftarKelas extends Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            data: [],
+            kelas: ''
+        }
 
-    _toDaftarSiswa = () => {
-        document.location.href = "/daftar-siswa"
+        this.componentDidMount = this.componentDidMount.bind(this)
+        this.setKelas = this.setKelas.bind(this)
+    }
+
+    async componentDidMount() {
+        try {
+            const baseUrl = "http://3.91.42.49";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+            let jurusan = this.props.location.state
+            
+            await axios.get(
+                `${baseUrl}/api/kelas/all?jurusan=${jurusan}`,
+                config
+            ).then(response => {
+                this.setState({ data: response.data.data})
+            })
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    async setKelas(kelas) {
+        await this.setState({ kelas: kelas})
+
+        this.props.history.push({
+          pathname: '/daftar-siswa',
+          state: this.state.kelas
+        })
     }
     render(){
         return(
-            <Container className="p-4">
-                <Row className="mb-3">
-                    <Col>
-                        <h4 style={{borderBottomWidth: 4, borderBottomColor: 'black'}}>Kelas X</h4>
-                    </Col>
+            <Container fluid className="main-content-container px-4">
+                <Row noGutters className="page-header py-4">
+                    <PageTitle sm="4" title="Daftar Siswa" subtitle="Buku Saku Online" className="text-sm-left" />
                 </Row>
                 <Row>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarSiswa}>
-                                <CardBody className="p-3" style={{ background: '#006CFF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#006CFF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#006CFF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#006CFF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#006CFF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#006CFF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row className="mb-3">
-                        <Col>
-                            <h4 style={{borderBottomWidth: 4, borderBottomColor: 'black'}}>Kelas XI</h4>
-                        </Col>
-                    </Row>
-                <Row>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#39A4EF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#39A4EF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#39A4EF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#39A4EF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#39A4EF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#39A4EF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                </Row>
-                    <Row className="mb-3">
-                        <Col>
-                            <h4 style={{borderBottomWidth: 4, borderBottomColor: 'black'}}>Kelas XII</h4>
-                        </Col>
-                    </Row>
-                <Row>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#376CEF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#376CEF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#376CEF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#376CEF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#376CEF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
-                    <Col lg="4">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this._toDaftarKelas}>
-                                <CardBody className="p-3" style={{ background: '#376CEF',borderRadius: 6}}>
-                                    <h6 className="mb-4" style={{color: '#fff'}} >X RPL 1</h6>
-                                    <p className="m-0" style={{color: '#fff'}} >Yuni Setiani</p>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
+                    {this.state.data.map((item,key) => {
+                        return(
+                            <Col lg="4" key={key}>
+                                <Card  className="mb-5">
+                                    <a href="#" onClick={() => this.setKelas(item.kelas)}>
+                                        <CardBody className="p-4" style={{ background: '#006CFF',borderRadius: 6}}>
+                                            <h6 className="mb-4" style={{color: '#fff', fontSize: '1.4rem', fontWeight: 'bold'}} >{item.kelas}</h6>
+                                            <p className="" style={{color: '#fff', fontWeight: '500'}} >{item.wali_kelas}</p>
+                                        </CardBody>
+                                    </a>
+                                </Card>
+                            </Col>
+                        )
+                    })}
                 </Row>
             </Container>
         )

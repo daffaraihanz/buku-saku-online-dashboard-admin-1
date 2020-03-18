@@ -8,13 +8,43 @@ class Tables extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        
+        jurusan: ''
     }
+    this.setRPL = this.setRPL.bind(this);
+    this.setTKJ = this.setTKJ.bind(this);
+    this.setTJA = this.setTJA.bind(this);
   } 
 
   _toDaftarKelas = () => {
     // <Redirect to='/daftar-kelas' />
     document.location.href = "/daftar-kelas"
+  }
+
+  async setRPL() {
+    await this.setState({ jurusan: 'RPL'})
+
+    this.props.history.push({
+      pathname: '/daftar-kelas',
+      state: this.state.jurusan
+    })
+  }
+
+  async setTKJ() {
+    await this.setState({ jurusan: 'TKJ'})
+
+    this.props.history.push({
+      pathname: '/daftar-kelas',
+      state: this.state.jurusan
+    })
+  }
+
+  async setTJA() {
+    await this.setState({ jurusan: 'TJA'})
+
+    this.props.history.push({
+      pathname: '/daftar-kelas',
+      state: this.state.jurusan
+    })
   }
 
   render(){
@@ -26,27 +56,27 @@ class Tables extends Component {
       <Row>
         <Col>
           <Card  className="mb-4">
-            <a href="#" onClick={this._toDaftarKelas}>
-              <CardBody style={{ background: 'green',borderRadius: 8}}>
-                <h6 className="m-0" style={{color: 'white'}} >Rekayasa Perangkat Lunak</h6>
+            <a href="" onClick={this.setRPL}>
+              <CardBody style={{ background: 'green',borderRadius: 6}}>
+                <h6 className="m-0" style={{color: 'white', fontWeight: '600'}} >Rekayasa Perangkat Lunak</h6>
               </CardBody>
             </a>
           </Card>
         </Col>
         <Col>
           <Card  className="mb-4">
-            <a href="#">
-              <CardBody className="border-bottom" style={{ background: 'red',borderRadius: 8,}}>
-                <h6 className="m-0" style={{color: 'white'}}>Tekhnik Jaringan Akses</h6>
+            <a href="" onClick={this.setTJA}>
+              <CardBody className="border-bottom" style={{ background: 'red',borderRadius: 6}}>
+                <h6 className="m-0" style={{color: 'white', fontWeight: '600'}}>Tekhnik Jaringan Akses</h6>
               </CardBody>
             </a>
           </Card>
         </Col>
         <Col>
           <Card  className="mb-4">
-            <a href="#">
-              <CardBody className="border-bottom" style={{ background: 'blue',borderRadius: 8}}>
-                <h6 className="m-0" style={{color: 'white'}}>Tekhnik Komputer Jaringan</h6>
+            <a href="" onClick={this.setTKJ}>
+              <CardBody className="border-bottom" style={{ background: 'blue',borderRadius: 6 }}>
+                <h6 className="m-0" style={{color: 'white', fontWeight: '600'}}>Tekhnik Komputer Jaringan</h6>
               </CardBody>
             </a>
           </Card>
