@@ -9,20 +9,15 @@ const Errors = () => {
     useEffect( async()=>{
         const token = await window.localStorage.getItem('token')
         console.log(token)
-        const get =await  axios.get('http://3.91.42.49/api/users/admin/all',{
-            'Authorization': "Bearer " + token
-        })
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+        const get =await  axios.get('http://3.91.42.49/api/users/admin/all',config)
         setData(get.data)
         console.log(data);
     },[])
-
-    // prepare for deleteData (no api for delete /user)
-    // const deleteData = async () =>{
-    //     const token = await window.localStorage.getItem('token')
-    //     const deleteNow = await axios.get('http://3.91.42.49/api/users/admin/all',{
-    //         'Authorization': "Bearer " + token
-    //     })
-    // }
     return(
         <Container fluid className="main-content-container px-4 pb-4">
             <Row className="mt-4">
