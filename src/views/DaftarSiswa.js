@@ -66,7 +66,7 @@ class DaftarSiswa extends Component{
               {this.state.data.map((item,key) => {
                 return(
                   <>
-                  <tr>
+                  <tr key={key}>
                     <td>1</td>
                     <td>{item.nis}</td>
                     <td>{item.name}</td>

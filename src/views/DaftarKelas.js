@@ -53,7 +53,7 @@ class DaftarKelas extends Component{
                 <Row>
                     {this.state.data.map((item,key) => {
                         return(
-                            <Col lg="4">
+                            <Col lg="4" key={key}>
                                 <Card  className="mb-5">
                                     <a href="#" onClick={() => this.setKelas(item.kelas)}>
                                         <CardBody className="p-4" style={{ background: '#006CFF',borderRadius: 6}}>
