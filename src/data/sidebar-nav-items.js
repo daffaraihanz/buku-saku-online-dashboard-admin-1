@@ -1,40 +1,50 @@
 export default function() {
   return [
     {
-      title: "Blog Dashboard",
-      to: "/blog-overview",
+      title: "Dashboard",
+      to: "/dashboard",
       htmlBefore: '<i class="material-icons">edit</i>',
       htmlAfter: ""
     },
+    // {
+    //   title: "Blog Posts",
+    //   htmlBefore: '<i class="material-icons">vertical_split</i>',
+    //   to: "/blog-posts",
+    // },
+    // {
+    //   title: "Forms & Components",
+    //   htmlBefore: '<i class="material-icons">view_module</i>',
+    //   to: "/components-overview",
+    // },
     {
-      title: "Blog Posts",
-      htmlBefore: '<i class="material-icons">vertical_split</i>',
-      to: "/blog-posts",
+      title: "Data Pasal",
+      htmlBefore: '<i class="material-icons">book</i>',
+      to: "/data-pasal",
     },
     {
-      title: "Add New Post",
-      htmlBefore: '<i class="material-icons">note_add</i>',
-      to: "/add-new-post",
-    },
-    {
-      title: "Forms & Components",
-      htmlBefore: '<i class="material-icons">view_module</i>',
-      to: "/components-overview",
-    },
-    {
-      title: "Tables",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/tables",
-    },
-    {
-      title: "User Profile",
+      title: "Data Siswa",
       htmlBefore: '<i class="material-icons">person</i>',
-      to: "/user-profile-lite",
+      to: "/data-siswa",
     },
     {
-      title: "Errors",
-      htmlBefore: '<i class="material-icons">error</i>',
-      to: "/errors",
-    }
+      title: "Tambah Admin",
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: "/tambah-admin",
+    },
+    {
+      title: "Profil",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/profil",
+    },
+    // {
+    //   title: "Lala",
+    //   htmlBefore: '<i class="material-icons">person</i>',
+    //   to: "/daftar-kelas",
+    // },
+    // {
+    //   title: "Login",
+    //   htmlBefore: '<i class="material-icons">person</i>',
+    //   to: "/login",
+    // },
   ];
 }
