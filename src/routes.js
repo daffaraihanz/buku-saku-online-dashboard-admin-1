@@ -16,6 +16,7 @@ import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import DaftarKelas from "./views/DaftarKelas";
 import DaftarSiswa from "./views/DaftarSiswa";
+import DataAdmin from "./views/DataAdmin";
 
 export default [
   {
@@ -33,6 +34,11 @@ export default [
     path: "/profil",
     layout: DefaultLayout,
     component: UserProfileLite
+  },
+  {
+    path: "/data-admin",
+    layout: DefaultLayout,
+    component: DataAdmin
   },
   {
     path: "/tambah-admin",

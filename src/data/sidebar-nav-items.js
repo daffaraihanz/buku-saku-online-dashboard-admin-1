@@ -29,7 +29,7 @@ export default function() {
     {
       title: "Tambah Admin",
       htmlBefore: '<i class="material-icons">note_add</i>',
-      to: "/tambah-admin",
+      to: "/data-admin",
     },
     {
       title: "Profil",
