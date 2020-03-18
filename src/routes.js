@@ -3,50 +3,54 @@ import { Redirect } from "react-router-dom";
 
 // Layout Types
 import { DefaultLayout } from "./layouts";
+import BlankLayout from "./layouts/blank"
 
 // Route Views
 import BlogOverview from "./views/BlogOverview";
 import UserProfileLite from "./views/UserProfileLite";
 import AddNewPost from "./views/AddNewPost";
 import Errors from "./views/Errors";
+import Login from "./views/Login";
 import ComponentsOverview from "./views/ComponentsOverview";
 import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
+import DaftarKelas from "./views/DaftarKelas";
+import DaftarSiswa from "./views/DaftarSiswa";
 
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/blog-overview" />
+    component: () => <Redirect to="/dashboard" />
   },
   {
-    path: "/blog-overview",
+    path: "/dashboard",
     layout: DefaultLayout,
     component: BlogOverview
   },
   {
-    path: "/user-profile-lite",
+    path: "/profil",
     layout: DefaultLayout,
     component: UserProfileLite
   },
   {
-    path: "/add-new-post",
+    path: "/tambah-admin",
     layout: DefaultLayout,
     component: AddNewPost
   },
   {
-    path: "/errors",
+    path: "/data-pasal",
     layout: DefaultLayout,
     component: Errors
   },
+  // {
+  //   path: "/components-overview",
+  //   layout: DefaultLayout,
+  //   component: ComponentsOverview
+  // },
   {
-    path: "/components-overview",
-    layout: DefaultLayout,
-    component: ComponentsOverview
-  },
-  {
-    path: "/tables",
+    path: "/data-siswa",
     layout: DefaultLayout,
     component: Tables
   },
@@ -54,5 +58,20 @@ export default [
     path: "/blog-posts",
     layout: DefaultLayout,
     component: BlogPosts
-  }
+  },
+  {
+    path: "/login",
+    layout: BlankLayout,
+    component: Login
+  },
+  {
+    path: "/daftar-kelas",
+    layout: DefaultLayout,
+    component: DaftarKelas
+  },
+  {
+    path: "/daftar-siswa",
+    layout: DefaultLayout,
+    component: DaftarSiswa
+  },
 ];
