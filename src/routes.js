@@ -17,6 +17,7 @@ import BlogPosts from "./views/BlogPosts";
 import DaftarKelas from "./views/DaftarKelas";
 import DaftarSiswa from "./views/DaftarSiswa";
 import DataAdmin from "./views/DataAdmin";
+import DataLala from "./views/DataLala";
 
 export default [
   {
@@ -79,5 +80,10 @@ export default [
     path: "/daftar-siswa",
     layout: DefaultLayout,
     component: DaftarSiswa
+  },
+  {
+    path: "/data-lala",
+    layout: DefaultLayout,
+    component: DataLala
   },
 ];

@@ -1,58 +1,60 @@
-import React from "react";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "shards-react";
+import React,{Component} from "react";
+import { Container, Row, Col, Card, Button, CardBody, ButtonGroup, FormInput } from "shards-react";
+import PageTitle from "../components/common/PageTitle";
+// import ReactModal from 'react-modal';
+import  { Redirect } from 'react-router-dom'
 
-const Errors = () => (
-  <Container fluid className="main-content-container px-4 pb-4">
-        <Row className="mt-4">
-      <Col>
-        <Card small className="mb-4">
-          <CardHeader className="border-bottom">
-            <h6 className="m-0">Pasal</h6>
-          </CardHeader>
+class Errors extends Component {
+  constructor () {
+    super();
+    this.state = {
+      showModal: false
+    };
+    // this.toDataLala();
+  }
 
-          <CardBody className="p-0 pb-3">
-            <table className="table mb-0">
-              <thead className="bg-light">
-                <tr>
-                  <th scope="col" className="border-0">
-                    No.
-                  </th>
-                  <th scope="col" className="border-0">
-                    Kategori
-                  </th>
-                  <th scope="col" className="border-0">
-                    Kode
-                  </th>
-                  <th scope="col" className="border-0">
-                    Poin
-                  </th>
-                  <th scope="col" className="border-0">
-                    Keterangan
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>KEIKUTSERTAAN DALAM KEJUARAAN</td>
-                  <td>T-404</td>
-                  <td>75</td>
-                  <td>Peserta lomba tingkat Internasional</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>KEIKUTSERTAAN DALAM KEJUARAAN</td>
-                  <td>T-403</td>
-                  <td>50</td>
-                  <td>Peserta lomba tingkat Nasional</td>
-                </tr>
-              </tbody>
-            </table>
-          </CardBody>
-        </Card>
-      </Col>
-    </Row>
-  </Container>
-);
+  toDataLala = () => {
+    document.location.href = "/data-lala"
+    //  return <Redirect to='/data-lala'  />
+  }
+
+
+  render(){
+    return(
+        <Container>
+          <Row noGutters className="page-header py-4">
+            <PageTitle sm="4" title="Data Pasal" subtitle="Buku Saku Online" className="text-sm-left" />
+          </Row>
+          <Row>
+            <Col lg="4" md="6">
+              <Card className="mb-4">
+                <a href="">
+                  <CardBody  className="border-bottom" style={{ padding: 20,background: 'white',borderRadius: 6}}>
+                    <div className="d-flex justify-content-between" style={{alignItems: 'center'}}>
+                      <a onClick={this.toDataLala} href="#">
+                        <h6   className="mb-0" style={{color: '#08022A', fontWeight: '600'}}>BAB I <br/> Pendahuluan</h6>
+                      </a>
+                        <div>
+                            <a href="#" className="text-white" onClick={this.handleOpenModal}>
+                              <Button  theme="primary" className="mr-1">
+                                  Edit
+                              </Button>
+                            </a>
+                            <a href="#" className="text-white">
+                              <Button theme="danger">
+                              Hapus
+                              </Button>
+                            </a>
+                      </div>
+                    </div>
+                  </CardBody>
+                </a>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+    )
+  }
+}
 
 export default Errors;
