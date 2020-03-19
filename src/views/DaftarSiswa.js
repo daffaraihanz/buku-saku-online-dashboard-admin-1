@@ -36,8 +36,8 @@ class DaftarSiswa extends Component{
     }
     render(){
         return(
-            <Container className="p-3">
-                <Row noGutters className="page-header py-4">
+          <Container fluid className="main-content-container px-4">
+            <Row noGutters className="page-header py-4">
                     <PageTitle sm="4" title="Daftar Siswa" subtitle="Buku Saku Online" className="text-sm-left" />
                 </Row>
                 <Row className="p-3">
@@ -67,7 +67,7 @@ class DaftarSiswa extends Component{
                 return(
                   <>
                   <tr key={key}>
-                    <td>1</td>
+                    <td>{key + 1}</td>
                     <td>{item.nis}</td>
                     <td>{item.name}</td>
                     <td>{item.point}</td>
