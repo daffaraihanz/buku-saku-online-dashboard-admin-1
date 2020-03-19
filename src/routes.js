@@ -17,7 +17,7 @@ import BlogPosts from "./views/BlogPosts";
 import DaftarKelas from "./views/DaftarKelas";
 import DaftarSiswa from "./views/DaftarSiswa";
 import DataAdmin from "./views/DataAdmin";
-
+import AddAdmin from "./views/AddAdmin";
 export default [
   {
     path: "/",
@@ -34,6 +34,11 @@ export default [
     path: "/profil",
     layout: DefaultLayout,
     component: UserProfileLite
+  },
+  {
+    path: "/add-admin/:id",
+    layout: DefaultLayout,
+    component: AddAdmin
   },
   {
     path: "/data-admin",
