@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
-import React, { useEffect,useState,Component } from "react";
-import { Container, Row, Col, Card, CardHeader, CardBody, Alert } from "shards-react";
+import React, { Component } from "react";
+import { Container, Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import axios from 'axios';
 
@@ -52,6 +52,12 @@ class DataAdmin extends Component {
             alert(error)
         }
     }
+    moveToAdd = () =>{
+        document.location.href = "/add-admin/add"
+    }
+    moveToEdit = id =>{
+        document.location.href = `/add-admin/${id}`
+    }
 
     render() {
         return(
@@ -63,7 +69,13 @@ class DataAdmin extends Component {
                     <Col>
                         <Card small className="mb-4">
                         <CardHeader className="border-bottom">
-                            <h6 className="m-0">Admin</h6>
+                            <div className="d-flex justify-content-between">
+                                <h6 className="m-0">Admin</h6>
+                                <Button onClick={this.moveToAdd} pill outline size="sm" className="mb-2">
+                                    <i className="material-icons mr-1">person_add</i> Add
+                                </Button>
+                            </div>
+                            
                         </CardHeader>
 
                         <CardBody className="p-0 pb-3">
@@ -95,8 +107,12 @@ class DataAdmin extends Component {
                                     <td>{val.email}</td>
                                     <td>{val.role}</td>
                                     <td>
-                                        <a>Edit ||</a>
-                                        <a onClick={() => this.delete(val._id)}> Hapus</a>
+                                        <Button onClick={() => this.moveToEdit(val._id)} pill outline size="sm" className="mb-2">
+                                            <i className="material-icons mr-1">create</i> Edit
+                                        </Button>
+                                        <Button onClick={() => this.delete(val._id)} pill outline size="sm" className="mb-2">
+                                            <i className="material-icons mr-1">delete</i> Delete
+                                        </Button>
                                     </td>
                                     </tr>
                                 ))}
