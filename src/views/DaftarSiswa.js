@@ -14,7 +14,11 @@ class DaftarSiswa extends Component{
           idHapus: '',
           name: '',
           nis: '',
-          point: ''
+          point: '',
+          email: '',
+          class: '',
+          password: '',
+          role: ''
       };
 
       this.componentDidMount = this.componentDidMount.bind(this);
@@ -76,7 +80,8 @@ class DaftarSiswa extends Component{
           console.log(this.state.idHapus,['ID'])
           console.log(update)
           if(update.data.code <= 200){
-              alert('Succsess')
+              alert('Sukses Update Siswa')
+              document.location.href = "/data-siswa"                  
           } else {
             alert('ERROR Ada yang salah')
           }
@@ -208,7 +213,6 @@ class DaftarSiswa extends Component{
                    <label htmlFor="feFirstName">NIS</label>
                    <FormInput
                       name="nis"
-                      placeholder="First Name"
                       value={this.state.nis}
                       onChange={this.handleChange}
                     />
@@ -221,7 +225,6 @@ class DaftarSiswa extends Component{
                       
                       <FormInput
                         name="name"
-                        placeholder="Email Address"
                         value={this.state.name}
                         onChange={this.handleChange}
                         />
