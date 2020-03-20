@@ -20,6 +20,8 @@ import DataAdmin from "./views/DataAdmin";
 import DataLala from "./views/DataLala";
 import AddAdmin from "./views/AddAdmin";
 import DataAyat from "./views/DataAyat";
+import AddSiswa from "./views/AddSiswa";
+import AddKelas from "./views/AddKelas";
 export default [
   {
     path: "/",
@@ -96,5 +98,15 @@ export default [
     path: "/data-ayat",
     layout: DefaultLayout,
     component: DataAyat
+  },
+  {
+    path: "/add-siswa",
+    layout: DefaultLayout,
+    component: AddSiswa
+  },
+  {
+    path: "/add-kelas",
+    layout: DefaultLayout,
+    component: AddKelas
   },
 ];
