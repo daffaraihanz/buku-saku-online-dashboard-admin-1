@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, Card, CardHeader, CardBody,Button,InputGroupAddon } from "shards-react";
+import { Container, Row, Col, Card, CardHeader, CardBody,Button,Form, FormInput } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import axios from 'axios';
 import './style/Overlay.css'
@@ -10,13 +10,19 @@ class DaftarSiswa extends Component{
       this.state = {
           data: [],
           modalHapus: true,
-          idHapus: ''
+          modalEdit: true,
+          idHapus: '',
+          name: '',
+          nis: '',
+          point: ''
       };
-      this.alertHapus = this.alertHapus.bind(this);
 
       this.componentDidMount = this.componentDidMount.bind(this);
       this.alertHapus = this.alertHapus.bind(this);
-      this.deleteSiswa = this.deleteSiswa.bind(this)
+      this.deleteSiswa = this.deleteSiswa.bind(this);
+      this.alertEdit = this.alertEdit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.updateSiswa = this.updateSiswa.bind(this);
     }
 
     alertHapus(id){
@@ -34,6 +40,50 @@ class DaftarSiswa extends Component{
         idHapus: id
       })
     }
+
+    alertEdit(id){
+      if(this.state.modalEdit === true){
+        this.setState({
+          modalEdit: false
+        })
+      }else if(this.state.modalEdit == false){
+          this.setState({
+            modalEdit: true
+        })
+      }
+
+      this.setState({
+        idHapus: id
+      })
+    }
+
+    handleChange = (event)=> {
+      this.setState({[event.target.name]: event.target.value });
+      console.log(event.target.value)
+    }
+
+    async updateSiswa() {
+        try {
+          const baseUrl = 'http://3.91.42.49'
+          const token = localStorage.getItem('token')
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          }
+
+          const update = await axios.put(`${baseUrl}/api/users/edit?id=${this.state.idHapus}`,this.state, config)
+          console.log(this.state.idHapus,['ID'])
+          console.log(update)
+          if(update.data.code <= 200){
+              alert('Succsess')
+          } else {
+            alert('ERROR Ada yang salah')
+          }
+        } catch (error) {
+          alert('Ada yang salah')
+        }
+    } 
 
     async deleteSiswa() {
       try {
@@ -115,7 +165,7 @@ class DaftarSiswa extends Component{
                     <td>{item.name}</td>
                     <td>{item.point}</td>
                     <td>
-                      <Button  theme="primary" className="mb-2 mr-2">
+                      <Button  theme="primary" className="mb-2 mr-2" onClick={() => this.alertEdit(item._id)}>
                           Edit
                       </Button>
                       <Button  theme="danger" className="mb-2" onClick={() => this.alertHapus(item._id)}>
@@ -142,6 +192,58 @@ class DaftarSiswa extends Component{
             </Col>
           </Row>
           <div className="overlay" style={{display: this.state.modalHapus ? 'none' : 'block'}}></div>
+          {/* End Alert */}
+
+          {/* Alert */}
+          <Row form className="justify-content-center">
+            <Col md="6" style={{display: this.state.modalEdit ? 'none' : 'block', zIndex: 9999, position: 'fixed', top: '30%', transform: [{translateY: '-50%'}]}}>
+              <Button  theme="danger" className="mb-2" onClick={this.alertEdit}>
+                Close
+              </Button>
+              <Card className="p-5">
+                <Form>
+                <Row form>
+                  {/* NIS */}
+                  <Col md="6" className="form-group">
+                   <label htmlFor="feFirstName">NIS</label>
+                   <FormInput
+                      name="nis"
+                      placeholder="First Name"
+                      value={this.state.nis}
+                      onChange={this.handleChange}
+                    />
+                  </Col>
+                  </Row>
+                    <Row form>
+                      {/* NAMA */}
+                      <Col md="6" className="form-group">
+                      <label htmlFor="feEmail">Nama</label>
+                      
+                      <FormInput
+                        name="name"
+                        placeholder="Email Address"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        />
+                      </Col>                                    
+                  </Row>
+                  <Row>
+                    <Col md="6" className="form-group">
+                    <label htmlFor="fePassword">Point</label>
+                    
+                    <FormInput
+                      name="point"
+                      onChange={this.handleChange}
+                      value={this.state.point}
+                      />
+                    </Col>
+                  </Row>
+                  <Button onClick={this.updateSiswa} theme="accent">Update</Button>
+                </Form>
+              </Card>
+            </Col>
+          </Row>
+          <div className="overlay" style={{display: this.state.modalEdit ? 'none' : 'block'}}></div>
           {/* End Alert */}
         </Container>
         )
