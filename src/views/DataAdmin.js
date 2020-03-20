@@ -61,40 +61,34 @@ class DataAdmin extends Component {
 
     render() {
         return(
-            <Container fluid className="main-content-container px-4 pb-4">
-                <Row noGutters className="page-header py-4">
+            <Container fluid className="main-content-container px-4">
+                <Row noGutters className="page-header pt-4">
                     <PageTitle sm="4" title="Daftar Admin" subtitle="Buku Saku Online" className="text-sm-left" />
                 </Row>
                 <Row className="mt-4">
                     <Col>
-                        <Card small className="mb-4">
-                        <CardHeader className="border-bottom">
-                            <div className="d-flex justify-content-between">
-                                <h6 className="m-0">Admin</h6>
-                                <Button onClick={this.moveToAdd} pill outline size="sm" className="mb-2">
-                                    <i className="material-icons mr-1">person_add</i> Add
+                            <div className="d-flex justify-content-end">
+                                <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                                    <i className="material-icons mr-1">person_add</i> Tambah Admin
                                 </Button>
                             </div>
                             
-                        </CardHeader>
-
-                        <CardBody className="p-0 pb-3">
                             <table className="table mb-0">
-                            <thead className="bg-light">
+                            <thead className="bg-primary">
                                 <tr>
-                                <th scope="col" className="border-0">
+                                <th scope="col" className="border-0 text-white">
                                     No.
                                 </th>
-                                <th scope="col" className="border-0">
+                                <th scope="col" className="border-0 text-white">
                                     Nama
                                 </th>
-                                <th scope="col" className="border-0">
+                                <th scope="col" className="border-0 text-white">
                                     Email
                                 </th>
-                                <th scope="col" className="border-0">
+                                <th scope="col" className="border-0 text-white">
                                     Role
                                 </th>
-                                <th scope="col" className="border-0">
+                                <th scope="col" className="border-0 text-white">
                                     Action
                                 </th>
                                 </tr>
@@ -107,19 +101,17 @@ class DataAdmin extends Component {
                                     <td>{val.email}</td>
                                     <td>{val.role}</td>
                                     <td>
-                                        <Button onClick={() => this.moveToEdit(val._id)} pill outline size="sm" className="mb-2">
-                                            <i className="material-icons mr-1">create</i> Edit
+                                        <Button onClick={() => this.moveToEdit(val._id)} theme="primary" className="mb-2 mr-2">
+                                            Edit
                                         </Button>
-                                        <Button onClick={() => this.delete(val._id)} pill outline size="sm" className="mb-2">
-                                            <i className="material-icons mr-1">delete</i> Delete
+                                        <Button onClick={() => this.delete(val._id)} theme="danger" className="mb-2">
+                                            Delete
                                         </Button>
                                     </td>
                                     </tr>
                                 ))}
                             </tbody>
                             </table>
-                        </CardBody>
-                        </Card>
                     </Col>
                 </Row>
             </Container>

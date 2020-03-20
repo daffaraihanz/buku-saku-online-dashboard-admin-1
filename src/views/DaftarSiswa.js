@@ -2,15 +2,30 @@ import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody,Button,InputGroupAddon } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import axios from 'axios';
+import './style/Overlay.css'
 
 class DaftarSiswa extends Component{
     constructor(props) {
       super(props)
       this.state = {
-          data: []
-      }
+          data: [],
+          modalHapus: true
+      };
+      this.alertHapus = this.alertHapus.bind(this);
 
       this.componentDidMount = this.componentDidMount.bind(this)
+    }
+
+    alertHapus (){
+      if( this.state.modalHapus === true){
+        this.setState({
+          modalHapus: false
+        })
+      }else if(this.state.modalHapus == false){
+          this.setState({
+            modalHapus: true
+          })
+      }
     }
 
     async componentDidMount() {
@@ -71,7 +86,14 @@ class DaftarSiswa extends Component{
                     <td>{item.nis}</td>
                     <td>{item.name}</td>
                     <td>{item.point}</td>
-                    <td>Hapus</td>
+                    <td>
+                      <Button  theme="primary" className="mb-2 mr-2">
+                          Edit
+                      </Button>
+                      <Button  theme="danger" className="mb-2" onClick={this.alertHapus}>
+                          Delete
+                      </Button>
+                    </td>
                   </tr>
                   </>
                 )
@@ -79,6 +101,20 @@ class DaftarSiswa extends Component{
               </tbody>
             </table>
           </Row>
+          {/* Alert */}
+          <Row form className="justify-content-center">
+            <Col md="6" style={{display: this.state.modalHapus ? 'none' : 'block', zIndex: 9999, position: 'fixed', top: '50%', transform: [{translateY: '-50%'}]}}>
+              <Card>
+                <CardBody className="text-center">
+              <p>Apakah Anda yakin ingin menghapus data?</p>
+            <Button className="btn btn-danger mr-2" onClick={this.alertHapus}>Yes</Button>
+            <Button className="btn btn-primary" onClick={this.alertHapus}>No</Button>
+            </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <div className="overlay" style={{display: this.state.modalHapus ? 'none' : 'block'}}></div>
+          {/* End Alert */}
         </Container>
         )
     }
