@@ -9,14 +9,17 @@ class DaftarSiswa extends Component{
       super(props)
       this.state = {
           data: [],
-          modalHapus: true
+          modalHapus: true,
+          idHapus: ''
       };
       this.alertHapus = this.alertHapus.bind(this);
 
-      this.componentDidMount = this.componentDidMount.bind(this)
+      this.componentDidMount = this.componentDidMount.bind(this);
+      this.alertHapus = this.alertHapus.bind(this);
+      this.deleteSiswa = this.deleteSiswa.bind(this)
     }
 
-    alertHapus (){
+    alertHapus(id){
       if( this.state.modalHapus === true){
         this.setState({
           modalHapus: false
@@ -25,6 +28,31 @@ class DaftarSiswa extends Component{
           this.setState({
             modalHapus: true
           })
+      }
+
+      this.setState({
+        idHapus: id
+      })
+    }
+
+    async deleteSiswa() {
+      try {
+          const token = localStorage.getItem('token')
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          }
+          const baseUrl = 'http://3.91.42.49'
+  
+          await axios.delete(`${baseUrl}/api/users/remove?id=${this.state.idHapus}`, config).then(response => {
+              if(response.data.code === 200) {
+                  alert("Berhasil Hapus Siswa");
+                  window.location.reload()
+              }
+          })
+      } catch (error) {
+          alert(error)
       }
     }
 
@@ -90,7 +118,7 @@ class DaftarSiswa extends Component{
                       <Button  theme="primary" className="mb-2 mr-2">
                           Edit
                       </Button>
-                      <Button  theme="danger" className="mb-2" onClick={this.alertHapus}>
+                      <Button  theme="danger" className="mb-2" onClick={() => this.alertHapus(item._id)}>
                           Delete
                       </Button>
                     </td>
@@ -107,7 +135,7 @@ class DaftarSiswa extends Component{
               <Card>
                 <CardBody className="text-center">
               <p>Apakah Anda yakin ingin menghapus data?</p>
-            <Button className="btn btn-danger mr-2" onClick={this.alertHapus}>Yes</Button>
+            <Button className="btn btn-danger mr-2" onClick={this.deleteSiswa}>Yes</Button>
             <Button className="btn btn-primary" onClick={this.alertHapus}>No</Button>
             </CardBody>
               </Card>
