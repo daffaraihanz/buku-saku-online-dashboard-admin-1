@@ -7,3 +7,12 @@
     top: 0;
     left: 0;
 }
+
+.btn-back{
+    background: #F5F6F8 !important;
+}
+
+.btn-back:hover{
+    background: #006CFE !important;
+    color:white !important;
+}

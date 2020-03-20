@@ -81,16 +81,20 @@ export default class AddAdmin extends React.Component{
             }
         }
     }
+
+    toDataAdmin(){
+        document.location.href = "/data-admin"
+    }
     render(){
         return(
             <Container fluid className="main-content-container px-4 pb-4">
                  <Row noGutters className="page-header py-4">
-                    <PageTitle sm="4" title="Daftar Admin" subtitle="Buku Saku Online" className="text-sm-left" />
+                    {/* <PageTitle sm="4" title="Tambah Kelas" subtitle="Buku Saku Online" className="text-sm-left" /> */}
+                    <Button onClick={this.toDataAdmin} className="mb-2 btn-back text-primary">
+                        <i className="material-icons mr-1">keyboard_arrow_left</i> Kembali
+                    </Button>
                 </Row>
                 <Card small className="mb-4">
-                <CardHeader className="border-bottom">
-                    <h6 className="m-0">Tambah Admin</h6>
-                </CardHeader>
                 <ListGroup flush>
                     <ListGroupItem className="p-3">
                         <Row>
@@ -125,7 +129,7 @@ export default class AddAdmin extends React.Component{
                                     {/* Password */}
                                     
                                 </Row>
-                                <Row>
+                                <Row form>
                                     <Col md="6" className="form-group">
                                     <label htmlFor="fePassword">Password</label>
                                     <FormInput

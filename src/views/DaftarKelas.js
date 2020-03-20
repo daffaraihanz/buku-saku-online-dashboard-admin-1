@@ -88,6 +88,10 @@ class DaftarKelas extends Component{
           state: this.state.kelas
         })
     }
+
+    toAddKelas(){
+        document.location.href = '/add-kelas'
+    }
     render(){
         return(
             <Container fluid className="main-content-container px-4">
@@ -97,7 +101,7 @@ class DaftarKelas extends Component{
                 <Row className="mb-2">
                     <Col>
                         <div className="d-flex justify-content-end">
-                            <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                            <Button theme="primary"  onClick={this.toAddKelas} className="mb-2">
                                 <i className="material-icons mr-1">add</i> Tambah Kelas
                             </Button>
                         </div>

@@ -62,6 +62,10 @@ class DaftarSiswa extends Component{
       console.log(event.target.value)
     }
 
+    toAddSiswa(){
+      document.location.href = "/add-siswa"
+    }
+
     async updateSiswa() {
         try {
           const baseUrl = 'http://3.91.42.49'
@@ -136,7 +140,7 @@ class DaftarSiswa extends Component{
                 <Row className="mb-2">
                     <Col>
                         <div className="d-flex justify-content-end">
-                            <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                            <Button theme="primary"  onClick={this.toAddSiswa} className="mb-2">
                                 <i className="material-icons mr-1">add</i> Tambah Siswa
                             </Button>
                         </div>
