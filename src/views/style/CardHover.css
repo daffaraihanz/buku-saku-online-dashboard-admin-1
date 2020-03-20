@@ -1,0 +1,15 @@
+.nana{
+    transition: .3s;
+}
+
+.nana:hover{
+    /* background: red !important; */
+    transition: .3s;
+    transform: translateY(-13px) !important; 
+    box-shadow: 0px 20px 15px -1px rgba(0, 0, 0, .2);
+    /* box-shadow: 0 10px 6px -2px black; */
+}
+
+.lala:hover{
+    color: red !important;
+}

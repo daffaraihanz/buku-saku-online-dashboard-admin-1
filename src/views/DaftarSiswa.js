@@ -133,28 +133,37 @@ class DaftarSiswa extends Component{
             <Row noGutters className="page-header py-4">
                     <PageTitle sm="4" title="Daftar Siswa" subtitle="Buku Saku Online" className="text-sm-left" />
                 </Row>
-                <Row className="p-3">
-                <table className="table mb-0">
-                <thead className="bg-primary">
-                <tr>
-                  <th scope="col" className="border-0 text-white">
-                    No.
-                  </th>
-                  <th scope="col" className="border-0 text-white">
-                    NIS
-                  </th>
-                  <th scope="col" className="border-0 text-white">
-                    Nama
-                  </th>
-                  <th scope="col" className="border-0 text-white">
-                    Poin
-                  </th>
-                  <th scope="col" className="border-0 text-white">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+                <Row className="mb-2">
+                    <Col>
+                        <div className="d-flex justify-content-end">
+                            <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                                <i className="material-icons mr-1">add</i> Tambah Siswa
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="px-3">
+                  <table className="table mb-0">
+                  <thead className="bg-primary">
+                  <tr>
+                    <th scope="col" className="border-0 text-white">
+                      No.
+                    </th>
+                    <th scope="col" className="border-0 text-white">
+                      NIS
+                    </th>
+                    <th scope="col" className="border-0 text-white">
+                      Nama
+                    </th>
+                    <th scope="col" className="border-0 text-white">
+                      Poin
+                    </th>
+                    <th scope="col" className="border-0 text-white">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
 
               {this.state.data.map((item,key) => {
                 return(
@@ -181,7 +190,7 @@ class DaftarSiswa extends Component{
           </Row>
           {/* Alert */}
           <Row form className="justify-content-center">
-            <Col md="6" style={{display: this.state.modalHapus ? 'none' : 'block', zIndex: 9999, position: 'fixed', top: '50%', transform: [{translateY: '-50%'}]}}>
+            <Col md="6" style={{display: this.state.modalHapus ? 'none' : 'block', zIndex: 9999, position: 'fixed', top: '30%', transform: [{translateY: '-50%'}]}}>
               <Card>
                 <CardBody className="text-center">
               <p>Apakah Anda yakin ingin menghapus data?</p>
