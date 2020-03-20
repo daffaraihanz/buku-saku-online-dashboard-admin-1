@@ -5,7 +5,7 @@ import PageTitle from "../components/common/PageTitle";
 class DataLala extends Component{
     render(){
         return(
-            <Container>
+            <Container fluid className="main-content-container px-4">
                 <Row noGutters className="page-header py-4">
                     <PageTitle sm="4" title="Data Pasal" subtitle="Buku Saku Online" className="text-sm-left" />
                  </Row>
