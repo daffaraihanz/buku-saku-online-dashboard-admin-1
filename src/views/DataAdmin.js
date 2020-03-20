@@ -57,9 +57,11 @@ class DataAdmin extends Component {
             alert(error)
         }
     }
+
     moveToAdd = () =>{
         document.location.href = "/add-admin/add"
     }
+    
     moveToEdit = id =>{
         document.location.href = `/add-admin/${id}`
     }
