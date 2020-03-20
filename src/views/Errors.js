@@ -6,6 +6,7 @@ import axios from 'axios'
 import  { Redirect } from 'react-router-dom'
 
 import './style/Overlay.css'
+import './style/CardHover.css'
 
 class Errors extends Component {
   constructor () {
@@ -115,33 +116,42 @@ class Errors extends Component {
           <Row noGutters className="page-header py-4">
             <PageTitle sm="4" title="Data Pasal" subtitle="Buku Saku Online" className="text-sm-left" />
           </Row>
+          <Row className="mb-2">
+                <Col>
+                    <div className="d-flex justify-content-end">
+                        <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                            <i className="material-icons mr-1">add</i> Tambah Bab
+                        </Button>
+                    </div>
+                </Col>
+            </Row>
           <Row>
               {this.state.data.map((item,key) => {
                 return(
                 <Col lg="4" md="6">
-                  <Card className="mb-4">
-                      <CardBody  className="border-bottom" style={{ padding: 20,background: 'white',borderRadius: 6}}>
+                  <Card className="mb-4 nana" >
+                      <CardBody  className="border-bottom" style={{ padding: 24,borderRadius: 6}}>
                         <div className="d-flex justify-content-between" style={{alignItems: 'center'}}>
                             <h6 className="mb-0 " style={{color: '#3d5170', fontWeight: '600'}}>{item.bab}</h6>
-                            <div>
-                                <a href="#" className="text-white" onClick={this.handleOpenModal}>
-                                  <Button  theme="primary" className="mr-1" onClick={this.alertEdit}>
-                                      Edit
-                                  </Button>
-                                </a>
-                                <a href="#" className="text-white">
-                                  <Button theme="danger" onClick={() => this.alertHapus(item._id)}>
-                                  Hapus
-                                  </Button>
-                                </a>
-                          </div>
+                        </div>
+                        <div className="d-flex align-items-center justify-content-between mt-5">
+                          <a cl onClick={this.toDataLala} href="#">
+                              Lihat Detail
+                          </a>
+                          <div>
+                              <a  href="#" className="text-white" onClick={this.handleOpenModal}>
+                                <Button  theme="primary" className="mr-1 mb-1 mt-1" onClick={this.alertEdit}>
+                                    Edit
+                                </Button>
+                              </a>
+                              <a href="#" className="text-white">
+                                <Button theme="danger" onClick={() => this.alertHapus(item._id)}>
+                                Hapus
+                                </Button>
+                              </a>
+                        </div>
                         </div>
                       </CardBody>
-                      <CardFooter style={{paddingLeft: 20, paddingBottom:10}}>
-                          <a onClick={this.toDataLala} href="#">
-                            <h6 className="text-primary">Lihat Detail</h6>
-                          </a>
-                      </CardFooter>
                   </Card>
                 </Col>
                 )
@@ -162,8 +172,8 @@ class Errors extends Component {
           <div className="overlay" style={{display: this.state.modalHapus ? 'none' : 'block'}}></div>
           {/* End Alert */}
           {/* Alert Edit */}
-          <Row form className="justify-content-center" style={{display: this.state.modalEdit ? 'none' : 'flex', zIndex: 9999, position: 'relative'}}>
-            <Col md="6">
+          <Row form className="justify-content-center">
+            <Col lg="4" md="6" style={{display: this.state.modalEdit ? 'none' : 'block', zIndex: 9999, position: 'relative',position: 'fixed', top: '30%', transform: [{translateY: '-50%'}]}}>
               <Card>
                 <CardBody>
               <FormGroup>

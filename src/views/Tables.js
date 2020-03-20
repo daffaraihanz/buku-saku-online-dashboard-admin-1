@@ -57,8 +57,8 @@ class Tables extends Component {
         <Col>
           <Card  className="mb-4">
             <a href="" onClick={this.setRPL}>
-              <CardBody style={{ background: 'green',borderRadius: 6}}>
-                <h6 className="m-0" style={{color: 'white', fontWeight: '600'}} >Rekayasa Perangkat Lunak</h6>
+              <CardBody className="bg-primary" style={{borderRadius: 6}}>
+                <h6 className="m-0" style={{color: '#fff', fontWeight: '600'}} >Rekayasa Perangkat Lunak</h6>
               </CardBody>
             </a>
           </Card>
@@ -66,8 +66,8 @@ class Tables extends Component {
         <Col>
           <Card  className="mb-4">
             <a href="" onClick={this.setTJA}>
-              <CardBody className="border-bottom" style={{ background: 'red',borderRadius: 6}}>
-                <h6 className="m-0" style={{color: 'white', fontWeight: '600'}}>Tekhnik Jaringan Akses</h6>
+              <CardBody className="bg-primary"  style={{borderRadius: 6}}>
+                <h6 className="m-0" style={{color: '#fff', fontWeight: '600'}}>Tekhnik Jaringan Akses</h6>
               </CardBody>
             </a>
           </Card>
@@ -75,8 +75,8 @@ class Tables extends Component {
         <Col>
           <Card  className="mb-4">
             <a href="" onClick={this.setTKJ}>
-              <CardBody className="border-bottom" style={{ background: 'blue',borderRadius: 6 }}>
-                <h6 className="m-0" style={{color: 'white', fontWeight: '600'}}>Tekhnik Komputer Jaringan</h6>
+              <CardBody className="bg-primary"  style={{ borderRadius: 6 }}>
+                <h6 className="m-0" style={{color: '#fff', fontWeight: '600'}}>Tekhnik Komputer Jaringan</h6>
               </CardBody>
             </a>
           </Card>

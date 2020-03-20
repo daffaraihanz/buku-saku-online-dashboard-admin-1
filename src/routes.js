@@ -19,6 +19,7 @@ import DaftarSiswa from "./views/DaftarSiswa";
 import DataAdmin from "./views/DataAdmin";
 import DataLala from "./views/DataLala";
 import AddAdmin from "./views/AddAdmin";
+import DataAyat from "./views/DataAyat";
 export default [
   {
     path: "/",
@@ -90,5 +91,10 @@ export default [
     path: "/data-lala",
     layout: DefaultLayout,
     component: DataLala
+  },
+  {
+    path: "/data-ayat",
+    layout: DefaultLayout,
+    component: DataAyat
   },
 ];
