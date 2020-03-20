@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import { Container, Row, Col, Card, Button, CardBody, ButtonGroup, FormInput, FormGroup } from "shards-react";
+import { Container, Row, Col, Card, Button, CardBody, ButtonGroup, FormInput, FormGroup, CardFooter } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 // import ReactModal from 'react-modal';
 import  { Redirect } from 'react-router-dom'
@@ -70,12 +70,9 @@ class Errors extends Component {
           <Row>
             <Col lg="4" md="6">
               <Card className="mb-4">
-                <a href="">
                   <CardBody  className="border-bottom" style={{ padding: 20,background: 'white',borderRadius: 6}}>
                     <div className="d-flex justify-content-between" style={{alignItems: 'center'}}>
-                      <a onClick={this.toDataLala} href="#">
-                        <h6   className="mb-0" style={{color: '#08022A', fontWeight: '600'}}>BAB I <br/> Pendahuluan</h6>
-                      </a>
+                        <h6 className="mb-0 " style={{color: '#3d5170', fontWeight: '600'}}>BAB I Pendahuluan</h6>
                         <div>
                             <a href="#" className="text-white" onClick={this.handleOpenModal}>
                               <Button  theme="primary" className="mr-1" onClick={this.alertEdit}>
@@ -90,7 +87,11 @@ class Errors extends Component {
                       </div>
                     </div>
                   </CardBody>
-                </a>
+                  <CardFooter style={{paddingLeft: 20, paddingBottom:10}}>
+                      <a onClick={this.toDataLala} href="#">
+                        <h6 className="text-primary">Lihat Detail</h6>
+                      </a>
+                  </CardFooter>
               </Card>
             </Col>
           </Row>

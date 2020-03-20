@@ -3,14 +3,18 @@ import React, { Component } from "react";
 import { Container, Row, Col, Card, CardHeader, CardBody, Button } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import axios from 'axios';
+import './style/Overlay.css'
 
 class DataAdmin extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            data: []
-        }
+            data: [],
+            modalHapus: true,
+            idHapus: ''
+        };
+        this.alertHapus = this.alertHapus.bind(this);
   
         this.componentDidMount = this.componentDidMount.bind(this)
     }
@@ -33,7 +37,7 @@ class DataAdmin extends Component {
         }
     }
 
-    async delete(id) {
+    async delete() {
         try {
             const token = localStorage.getItem('token')
             const config = {
@@ -43,9 +47,10 @@ class DataAdmin extends Component {
             }
             const baseUrl = 'http://3.91.42.49'
 
-            await axios.delete(`${baseUrl}/api/users/remove?id=${id}`, config).then(response => {
+            await axios.delete(`${baseUrl}/api/users/remove?id=${this.state.idHapus}`, config).then(response => {
                 if(response.data.code === 200) {
-                    alert("Berhasil Hapus Admin")
+                    alert("Berhasil Hapus Admin");
+                    window.location.reload()
                 }
             })
         } catch (error) {
@@ -58,6 +63,22 @@ class DataAdmin extends Component {
     moveToEdit = id =>{
         document.location.href = `/add-admin/${id}`
     }
+
+    alertHapus (id){
+        if( this.state.modalHapus === true){
+          this.setState({
+            modalHapus: false
+          })
+        }else if(this.state.modalHapus == false){
+            this.setState({
+              modalHapus: true
+            })
+        }
+
+        this.setState({
+            idHapus: id
+        })
+      }
 
     render() {
         return(
@@ -104,7 +125,7 @@ class DataAdmin extends Component {
                                         <Button onClick={() => this.moveToEdit(val._id)} theme="primary" className="mb-2 mr-2">
                                             Edit
                                         </Button>
-                                        <Button onClick={() => this.delete(val._id)} theme="danger" className="mb-2">
+                                        <Button onClick={() => this.alertHapus(val._id)} theme="danger" className="mb-2">
                                             Delete
                                         </Button>
                                     </td>
@@ -114,6 +135,26 @@ class DataAdmin extends Component {
                             </table>
                     </Col>
                 </Row>
+                {/* Alert */}
+          <Row form className="justify-content-center">
+            <Col md="6" style={{display: this.state.modalHapus ? 'none' : 'block', zIndex: 9999, position: 'fixed', top: '50%', transform: [{translateY: '-50%'}]}}>
+              <Card>
+
+                <CardBody className="text-center">
+
+              <p>Apakah Anda yakin ingin menghapus data?</p>
+
+            <Button className="btn btn-danger mr-2" onClick={() => this.delete()}>Yes</Button>
+
+            <Button className="btn btn-primary" onClick={this.alertHapus}>No</Button>
+
+            </CardBody>
+
+              </Card>
+            </Col>
+          </Row>
+          <div className="overlay" style={{display: this.state.modalHapus ? 'none' : 'block'}}></div>
+          {/* End Alert */}
             </Container>
         )}
 }
