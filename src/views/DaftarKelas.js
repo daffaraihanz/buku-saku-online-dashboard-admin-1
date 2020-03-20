@@ -9,14 +9,20 @@ class DaftarKelas extends Component{
         this.state = {
             data: [],
             kelas: '',
+            wali_kelas: '',
+            jurusan: '',
             modalHapus: true,
             modalEdit: true,
+            idHapus: ''
         }
         this.hapus = this.alertHapus.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this)
         this.setKelas = this.setKelas.bind(this)
         this.alertHapus = this.alertHapus.bind(this);
         this.alertEdit = this.alertEdit.bind(this);
+        this.updateKelas = this.updateKelas.bind(this);
+        this.deleteKelas = this.deleteKelas.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     alertHapus(id){
@@ -35,7 +41,7 @@ class DaftarKelas extends Component{
         })
       }
     
-      alertEdit (){
+    alertEdit(id){
         if( this.state.modalEdit === true){
           this.setState({
             modalEdit: false
@@ -45,9 +51,13 @@ class DaftarKelas extends Component{
               modalEdit: true
             })
         }
-      }
+        
+        this.setState({
+            idHapus: id
+        })
+    }
     
-      hapus() {
+    hapus() {
         if( this.state.modalHapus === true){
           this.setState({
             modalHapus: false
@@ -57,7 +67,7 @@ class DaftarKelas extends Component{
               modalHapus: true
             })
         }
-      }
+    }
 
     async componentDidMount() {
         try {
@@ -80,6 +90,57 @@ class DaftarKelas extends Component{
         }
     }
 
+    async updateKelas() {
+        try {
+          const baseUrl = 'http://3.91.42.49'
+          const token = localStorage.getItem('token')
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          }
+
+          let model = {
+            kelas: this.state.kelas,
+            wali_kelas: this.state.wali_kelas,
+            jurusan: this.state.jurusan
+          }
+
+          const update = await axios.put(`${baseUrl}/api/kelas/edit?id=${this.state.idHapus}`,model, config)
+          console.log(this.state.idHapus,['ID'])
+          console.log(update)
+          if(update.data.code <= 200){
+              alert('Sukses Update Siswa')
+              document.location.href = "/data-siswa"                  
+          } else {
+            alert('ERROR Ada yang salah')
+          }
+        } catch (error) {
+          alert('Ada yang salah')
+        }
+    } 
+
+    async deleteKelas() {
+      try {
+          const token = localStorage.getItem('token')
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          }
+          const baseUrl = 'http://3.91.42.49'
+  
+          await axios.delete(`${baseUrl}/api/kelas/remove?id=${this.state.idHapus}`, config).then(response => {
+              if(response.data.code === 200) {
+                  alert("Berhasil Hapus Siswa");
+                  document.location.href = "/data-siswa"                  
+              }
+          })
+      } catch (error) {
+          alert(error)
+      }
+    }
+
     async setKelas(kelas) {
         await this.setState({ kelas: kelas})
 
@@ -92,6 +153,12 @@ class DaftarKelas extends Component{
     toAddKelas(){
         document.location.href = '/add-kelas'
     }
+
+    handleChange = (event)=> {
+        this.setState({[event.target.name]: event.target.value });
+        console.log(event)
+    }
+
     render(){
         return(
             <Container fluid className="main-content-container px-4">
@@ -123,7 +190,7 @@ class DaftarKelas extends Component{
                                         </a>
                                         <div>
                                             <a href="#" className="text-white" onClick={this.handleOpenModal}>
-                                                <Button  theme="primary" className="mr-1 mb-1 mt-1" onClick={this.alertEdit}>
+                                                <Button  theme="primary" className="mr-1 mb-1 mt-1" onClick={() => this.alertEdit(item._id)}>
                                                     Edit
                                                 </Button>
                                             </a>
@@ -145,8 +212,8 @@ class DaftarKelas extends Component{
                             <Card>
                                 <CardBody className="text-center">
                             <p>Apakah Anda yakin ingin menghapus data?</p>
-                            <Button className="btn btn-danger mr-2" onClick={this.hapus}>Yes</Button>
-                            <Button className="btn btn-primary" onClick={this.alertHapus}>No</Button>
+                            <Button className="btn btn-danger mr-2" onClick={this.deleteKelas}>Yes</Button>
+                            <Button className="btn btn-primary" onClick={this.hapus}>No</Button>
                             </CardBody>
                             </Card>
                             </Col>
@@ -159,14 +226,18 @@ class DaftarKelas extends Component{
                                 <Card>
                                 <CardBody>
                                 <FormGroup>
-                                    <label htmlFor="judul">Masukkan Kelas Baru</label>
-                                    <FormInput className="mb-3" id="judul" placeholder="Kelas Baru"></FormInput>
-                                    <label htmlFor="judul">Masukkan Wali Kelas Baru</label>
-                                    <FormInput id="judul" placeholder="Wali Kelas Baru"></FormInput>
+                                    <label htmlFor="kelas">Masukkan Kelas Baru</label>
+                                    <FormInput className="mb-3" id="kelas" name="kelas" placeholder="Kelas Baru" onChange={this.handleChange}></FormInput>
+
+                                    <label htmlFor="wali_kelas">Masukkan Wali Kelas Baru</label>
+                                    <FormInput className="mb-3" id="wali_kelas" placeholder="Wali Kelas Baru" name="wali_kelas" onChange={this.handleChange}></FormInput>
+
+                                    <label htmlFor="jurusan">Masukkan Jurusan</label>
+                                    <FormInput id="jurusan" placeholder="Pilih Jurusan RPL:TKJ:TJA" name="jurusan" onChange={this.handleChange}></FormInput>
                                 </FormGroup>
                                 <div className="mt-2">
-                                    <Button className="btn btn-primary mr-2" onClick={this.alertEdit}>Simpan</Button>
-                                    <Button className="btn btn-danger" onClick={this.alertEdit}>Batal</Button>
+                                    <Button className="btn btn-primary mr-2" onClick={this.updateKelas}>Simpan</Button>
+                                    <Button className="btn btn-danger" onClick={this.hapus}>Batal</Button>
                                 </div>
                             </CardBody>
                                 </Card>
