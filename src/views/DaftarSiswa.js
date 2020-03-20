@@ -48,7 +48,7 @@ class DaftarSiswa extends Component{
           await axios.delete(`${baseUrl}/api/users/remove?id=${this.state.idHapus}`, config).then(response => {
               if(response.data.code === 200) {
                   alert("Berhasil Hapus Siswa");
-                  window.location.reload()
+                  document.location.href = "/data-siswa"                  
               }
           })
       } catch (error) {
