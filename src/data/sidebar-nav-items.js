@@ -32,6 +32,16 @@ export default function() {
       to: "/data-admin",
     },
     {
+      title: "Riwayat Pelanggaran",
+      htmlBefore: '<i class="material-icons">history</i>',
+      to: "/riwayat",
+    },
+    {
+      title: "Tambah Point Siswa",
+      htmlBefore: '<i class="material-icons">control_point</i>',
+      to: "/tambah-point",
+    },
+    {
       title: "Profil",
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/profil",
