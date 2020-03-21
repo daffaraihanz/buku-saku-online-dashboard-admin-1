@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody,Button,InputGroupAddon,FormGroup,FormInput } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
+import axios from 'axios'
 
 class DataAyat extends Component {
     constructor(props) {
@@ -8,10 +9,12 @@ class DataAyat extends Component {
         this.state = {
             modalHapus: true,
             modalEdit: true,
+            data: []
         }
         this.hapus = this.alertHapus.bind(this);
         this.alertHapus = this.alertHapus.bind(this);
         this.alertEdit = this.alertEdit.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     alertHapus(id){
@@ -54,8 +57,31 @@ class DataAyat extends Component {
         }
       }
 
-      toAddAyat(){
+    toAddAyat(){
         document.location.href = "/add-ayat"
+    }
+
+    async componentDidMount() {
+        try {
+          const baseUrl = "http://3.91.42.49";
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+          }
+          let id = this.props.location.state
+          console.log(id,['id'])
+          
+          await axios.get(
+              `${baseUrl}/api/peraturan?id=${id}`,
+              config
+          ).then(response => {
+              console.log(response,['ANJG'])
+              this.setState({ data: response.data.data.pasal })
+          })
+        } catch (error) {
+            alert(error)
+        }
     }
     render(){
         return(
@@ -88,18 +114,33 @@ class DataAyat extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia similique non ipsam est doloribus adipisci esse. </td>
-                        <td>
-                        <Button onClick={this.alertEdit} theme="primary" className="mb-2 mr-2">
-                            Edit
-                        </Button>
-                        <Button onClick={this.alertHapus}theme="danger" className="mb-2">
-                            Delete
-                        </Button>
-                        </td>
-                    </tr>
+                    {this.state.data.map((item,key) => {
+                        return(
+                            <>
+                            {item.desc.map((value, kunci) => {
+                                return(
+                                    <>
+                                    <tr key={kunci}>
+                                        <td>{kunci + 1}</td>
+                                        <td>{value.descPasal}</td>
+                                        <td>
+                                        <Button onClick={this.alertEdit} theme="primary" className="mb-2 mr-2">
+                                            Edit
+                                        </Button>
+                                        <Button onClick={this.alertHapus}theme="danger" className="mb-2">
+                                            Delete
+                                        </Button>
+                                        </td>
+                                    </tr>
+                                    </>
+
+                                )
+
+                            })}
+
+                            </>
+                        )
+                    })}
                 </tbody>
                 </table>
             </Row>
