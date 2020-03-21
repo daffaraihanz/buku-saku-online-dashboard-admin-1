@@ -15,13 +15,17 @@ class Errors extends Component {
       modalHapus: true,
       modalEdit: true,
       data: [],
-      idHapus: ''
+      idHapus: '',
+      bab: ''
     };
     this.alertHapus = this.alertHapus.bind(this);
     this.alertEdit = this.alertEdit.bind(this);
     this.hapus = this.alertHapus.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.deleteBab = this.deleteBab.bind(this)
+    this.deleteBab = this.deleteBab.bind(this);
+    this.updateBab = this.updateBab.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.toDetail = this.toDetail.bind(this);
   }
 
   toDataLala = () => {
@@ -49,7 +53,7 @@ class Errors extends Component {
     })
   }
 
-  alertEdit (){
+  alertEdit(id){
     if( this.state.modalEdit === true){
       this.setState({
         modalEdit: false
@@ -59,6 +63,10 @@ class Errors extends Component {
           modalEdit: true
         })
     }
+
+    this.setState({
+      idHapus: id
+    })
   }
 
   hapus() {
@@ -84,15 +92,16 @@ class Errors extends Component {
         const baseUrl = 'http://3.91.42.49'
 
         await axios.get(`${baseUrl}/api/peraturan/all`, config).then(response => {
+            console.log(response)
             this.setState({ data: response.data.data })
         })
     } catch (error) {
+        console.log(error)
         alert(error)
     }
   }
 
   async deleteBab() {
-    // WIP DELETE
     try {
         const token = localStorage.getItem('token')
         const config = {
@@ -112,6 +121,48 @@ class Errors extends Component {
         alert(error)
     }
   }
+
+  async updateBab() {
+    try {
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        let data = {
+          bab: this.state.bab
+        }
+        const baseUrl = 'http://3.91.42.49'
+        console.log(this.state)
+
+        await axios.put(`${baseUrl}/api/peraturan/edit/bab?id=${this.state.idHapus}`,data, config).then(response => {
+            if(response.data.code === 200) {
+                alert("Berhasil Edit Admin");
+                window.location.reload()
+            }
+        })
+    } catch (error) {
+        alert(error)
+    }
+  }
+  
+  handleChange = (event)=> {
+    this.setState({[event.target.name]: event.target.value });
+    console.log(event)
+  }
+
+  async toDetail(id) {
+    await this.setState({
+      idHapus: id
+    })
+
+    this.props.history.push({
+      pathname: '/data-lala',
+      state: this.state.idHapus
+    })
+  }
+
 
   render(){
     return(
@@ -139,12 +190,12 @@ class Errors extends Component {
                             <h6 className="mb-0 " style={{color: '#3d5170', fontWeight: '600'}}>{item.bab}</h6>
                         </div>
                         <div className="d-flex align-items-center justify-content-between mt-5">
-                          <a cl onClick={this.toDataLala} href="#">
+                          <a cl onClick={() => this.toDetail(item._id)} href="#">
                               Lihat Detail
                           </a>
                           <div>
                               <a  href="#" className="text-white" onClick={this.handleOpenModal}>
-                                <Button  theme="primary" className="mr-1 mb-1 mt-1" onClick={this.alertEdit}>
+                                <Button  theme="primary" className="mr-1 mb-1 mt-1" onClick={() => this.alertEdit(item._id)}>
                                     Edit
                                 </Button>
                               </a>
@@ -181,10 +232,10 @@ class Errors extends Component {
               <Card>
                 <CardBody>
               <FormGroup>
-                <label htmlFor="judul">Masukkan Judul Baru</label>
-                <FormInput id="judul" placeholder="Judul Baru"></FormInput>
+                <label htmlFor="bab">Masukkan Judul Baru</label>
+                <FormInput id="bab" placeholder="Judul Baru" name="bab" onChange={this.handleChange}></FormInput>
               </FormGroup>
-            <Button className="btn btn-primary mr-2" onClick={this.alertEdit}>Simpan</Button>
+            <Button className="btn btn-primary mr-2" onClick={this.updateBab}>Simpan</Button>
             <Button className="btn btn-danger" onClick={this.alertEdit}>Batal</Button>
             </CardBody>
               </Card>
