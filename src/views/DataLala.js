@@ -41,6 +41,10 @@ class DataLala extends Component{
         document.location.href = './data-ayat'
       }
 
+      toAddPasal(){
+        document.location.href = './add-pasal'
+      }
+
     render(){
         return(
             <Container fluid className="main-content-container px-4">
@@ -50,7 +54,7 @@ class DataLala extends Component{
                  <Row className="mb-2">
                     <Col>
                         <div className="d-flex justify-content-end">
-                            <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                            <Button theme="primary"  onClick={this.toAddPasal} className="mb-2">
                                 <i className="material-icons mr-1">add</i> Tambah Pasal
                             </Button>
                         </div>

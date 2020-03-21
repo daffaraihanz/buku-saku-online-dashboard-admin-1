@@ -53,6 +53,10 @@ class DataAyat extends Component {
             })
         }
       }
+
+      toAddAyat(){
+        document.location.href = "/add-ayat"
+    }
     render(){
         return(
             <Container fluid className="main-content-container px-4">
@@ -62,7 +66,7 @@ class DataAyat extends Component {
                 <Row className="mb-2">
                     <Col>
                         <div className="d-flex justify-content-end">
-                            <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                            <Button theme="primary"  onClick={this.toAddAyat} className="mb-2">
                                 <i className="material-icons mr-1">add</i> Tambah Ayat
                             </Button>
                         </div>
