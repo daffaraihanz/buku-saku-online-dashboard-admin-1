@@ -22,6 +22,9 @@ import AddAdmin from "./views/AddAdmin";
 import DataAyat from "./views/DataAyat";
 import AddSiswa from "./views/AddSiswa";
 import AddKelas from "./views/AddKelas";
+import AddBab from "./views/AddBab";
+import AddPasal from "./views/AddPasal";
+import AddAyat from "./views/AddAyat";
 export default [
   {
     path: "/",
@@ -108,5 +111,20 @@ export default [
     path: "/add-kelas",
     layout: DefaultLayout,
     component: AddKelas
+  },
+  {
+    path: "/add-bab",
+    layout: DefaultLayout,
+    component: AddBab
+  },
+  {
+    path: "/add-pasal",
+    layout: DefaultLayout,
+    component: AddPasal
+  },
+  {
+    path: "/add-ayat",
+    layout: DefaultLayout,
+    component: AddAyat
   },
 ];

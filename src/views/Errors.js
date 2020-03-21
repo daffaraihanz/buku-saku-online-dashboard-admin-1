@@ -29,6 +29,10 @@ class Errors extends Component {
     //  return <Redirect to='/data-lala'  />
   }
 
+  toAddBab (){
+    document.location.href = "/add-bab"
+  }
+
   alertHapus(id){
     if( this.state.modalHapus === true){
       this.setState({
@@ -119,7 +123,7 @@ class Errors extends Component {
           <Row className="mb-2">
                 <Col>
                     <div className="d-flex justify-content-end">
-                        <Button theme="primary"  onClick={this.moveToAdd} className="mb-2">
+                        <Button theme="primary"  onClick={this.toAddBab} className="mb-2">
                             <i className="material-icons mr-1">add</i> Tambah Bab
                         </Button>
                     </div>
