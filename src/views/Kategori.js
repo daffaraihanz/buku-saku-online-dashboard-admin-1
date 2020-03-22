@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody,Button,ListGroup,ListGroupItem,FormGroup,FormInput } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
+import axios from 'axios'
 
 class Kategori extends Component {
     constructor(props) {
@@ -12,7 +13,9 @@ class Kategori extends Component {
             jurusan: '',
             modalHapus: true,
             modalEdit: true,
-            idHapus: ''
+            idHapus: '',
+            kategori: '',
+            kategoriParameter: ''
         }
         this.hapus = this.alertHapus.bind(this);
         this.alertHapus = this.alertHapus.bind(this);
@@ -52,8 +55,52 @@ class Kategori extends Component {
         })
     }
 
-    toDetailKategori(){
-        document.location.href= "/detail-kategori"
+    async toDetailKategori(param){
+        await this.setState({ kategoriParameter: param })
+    
+        this.props.history.push({
+          pathname: '/detail-kategori',
+          state: this.state.kategoriParameter
+        })
+    }
+
+    async componentDidMount() {
+        try {
+            let kategori = this.props.location.state;
+            
+            if(kategori === 'pelanggaran') {
+                const baseUrl = "http://3.91.42.49";
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+                await axios.get(
+                    `${baseUrl}/api/point/kategori/list`,
+                    config
+                ).then(response => {
+                    this.setState({ data: response.data.data})
+                })
+            }
+
+            if(kategori === 'prestasi') {
+                const baseUrl = "http://3.91.42.49";
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+                await axios.get(
+                    `${baseUrl}/api/point/kategori/prestasi/list`,
+                    config
+                ).then(response => {
+                    this.setState({ data: response.data.data})
+                })
+            }
+
+        } catch (error) {
+            alert(error)
+        }
     }
     
     render(){
@@ -63,15 +110,19 @@ class Kategori extends Component {
                     <PageTitle sm="4" title="Daftar Point" subtitle="Buku Saku Online" className="text-sm-left" />
                  </Row>
                  <Row> 
-                    <Col lg="4" md="6">
-                        <Card  className="mb-4">
-                            <a href="#" onClick={this.toDetailKategori}>
-                                <CardBody className="bg-primary"  style={{borderRadius: 6}}>
-                                    <h6 className="m-0" style={{color: '#fff', fontWeight: '600'}}>Berpakaian</h6>
-                                </CardBody>
-                            </a>
-                        </Card>
-                    </Col>
+                    {this.state.data.map((item,key) => {
+                        return(
+                            <Col lg="4" md="6" key={key}>
+                                <Card  className="mb-4">
+                                    <a href="#" onClick={() => this.toDetailKategori(item.kategori)}>
+                                        <CardBody className="bg-primary"  style={{borderRadius: 6}}>
+                                            <h6 className="m-0" style={{color: '#fff', fontWeight: '600'}}>{item.kategori}</h6>
+                                        </CardBody>
+                                    </a>
+                                </Card>
+                            </Col>
+                        )
+                    })}
                 </Row>
             </Container>
         )
