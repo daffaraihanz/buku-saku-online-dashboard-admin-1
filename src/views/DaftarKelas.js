@@ -237,7 +237,7 @@ class DaftarKelas extends Component{
                                 </FormGroup>
                                 <div className="mt-2">
                                     <Button className="btn btn-primary mr-2" onClick={this.updateKelas}>Simpan</Button>
-                                    <Button className="btn btn-danger" onClick={this.hapus}>Batal</Button>
+                                    <Button className="btn btn-danger" nClick={this.alertEdit}>Batal</Button>
                                 </div>
                             </CardBody>
                                 </Card>

@@ -54,7 +54,7 @@ login = (e) => {
 
 render(){
 return(
-    <Row className="p-5 justify-content-center">
+    <Row className="p-5 justify-content-center m-0">
         <Col lg="4" md="6" style={{ marginTop:100 }}>
             <Card small className="mb-4">
                 <CardHeader className="border-bottom text-center">
@@ -62,9 +62,6 @@ return(
                 </CardHeader>
                 <Col>
                     <Form className="p-2 py-4" onSubmit={this.login}>
-                        <Row form>
-                            {/* Email */}
-                            <Col md="12" lg="12" className="form-group">
                             <label htmlFor="feEmail">Email</label>
                             <FormInput
                             style={{ width: "100%",height: 50,fontSize:14 }}
@@ -75,12 +72,8 @@ return(
                                 autoComplete="email"
                                 name="email"
                                 onChange={this.handleInputChange}
+                                className="mb-4"
                             />
-                            </Col>
-                        </Row>
-                        <Row form>
-                            {/* Password */}
-                            <Col md="12" lg="12" className="form-group">
                             <label htmlFor="fePassword">Password</label>
                             <FormInput
                             style={{ width: "100%",height: 50,fontSize:14 }}
@@ -91,13 +84,12 @@ return(
                                 // onChange={() => {}}
                                 autoComplete="current-password"
                                 onChange={this.handleInputChange} 
+                                className="mb-4"
                             />
-                            </Col>
-                        </Row>
                         <Button 
-                        onClick={this.login}
-                        className="mt-2"
-                        style={{ width: "100%",height: 50,fontSize:14 }}
+                            onClick={this.login}
+                            className="mt-2"
+                            style={{ width: "100%",height: 50,fontSize:14 }}
                         >Login</Button>
                     </Form>
                 </Col>

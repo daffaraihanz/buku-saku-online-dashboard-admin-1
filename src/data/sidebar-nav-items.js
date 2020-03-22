@@ -42,6 +42,11 @@ export default function() {
       to: "/lapor-prestasi",
     },
     {
+      title: "Daftar Point",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/daftar-point",
+    },
+    {
       title: "Profil",
       htmlBefore: '<i class="material-icons">person</i>',
       to: "/profil",
