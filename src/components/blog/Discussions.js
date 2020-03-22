@@ -10,11 +10,54 @@ import {
   Row,
   Col
 } from "shards-react";
+import axios from 'axios'
+
 
 class Discussions extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+        data: [],
+        id: ''
+    }
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.toDetailRiwayat = this.toDetailRiwayat.bind(this);
+  }
+
+  async componentDidMount() {
+    try {
+      const baseUrl = "http://3.91.42.49";
+      const config = {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      }
+
+      await axios.get(
+          `${baseUrl}/api/lapor/all`,
+          config
+      ).then(response => {
+          let array = []
+          for(let i = 0; i<4; i++) {
+            let data = response.data.data[i]
+            array.push(data)
+          }
+          this.setState({ data: array })
+      })
+    } catch (error) {
+        // alert(error)
+    }
+  }
 
   toRiwayat(){
     document.location.href= "/riwayat"
+  }
+
+  toDetailRiwayat(id){
+    this.props.history.push({
+        pathname: '/detail-riwayat',
+        state: id
+    })
   }
       render(){
         return(
@@ -25,45 +68,26 @@ class Discussions extends Component {
             <CardBody className="p-3">
                 <div className="mb-4 border-bottom pb-3">
                     {/* Avatar */}
+                    {this.state.data.map((item,key) => {
+                      return(
+                        <>
+                        
                     <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
-                        <img className="mr-3" src="https://placeimg.com/50/50/any" alt="" />
+                        <img className="mr-3" src={`http://${item.image}`} alt="" />
                         <div>
-                            <h5 className="mb-1">Daffa Raihanz </h5>
-                            <p style={{fontWeight: 300}} className="mb-4">Rambut lebih dari 3cm</p>
-                            <div className="d-flex justify-content-between">
-                                <a  className="mr-3" href="#">Lihat Detail</a>
-                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">12 Januari 2020</p>
+                            <h6 className="mb-1">{item.user.nama}</h6>
+                            <p style={{fontWeight: 300}} className="mb-4">{item.pelanggaran.kategori}</p>
+                            <div className="d-flex justify-content-between mb-3 mt--1">
+                                {/* <a  className="mr-3" href="#" onClick={() => this.toDetailRiwayat(item._id)}>Lihat Detail</a> */}
+                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">{item.createdDate}</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="mb-4 border-bottom pb-3">
-                    {/* Avatar */}
-                    <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
-                        <img className="mr-3" src="https://placeimg.com/50/50/any" alt="" />
-                        <div>
-                            <h5 className="mb-1">Daffa Raihanz </h5>
-                            <p style={{fontWeight: 300}} className="mb-4">Rambut lebih dari 3cm</p>
-                            <div className="d-flex justify-content-between">
-                                <a  className="mr-3" href="#">Lihat Detail</a>
-                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">12 Januari 2020</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="mb-4 border-bottom pb-3">
-                    {/* Avatar */}
-                    <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
-                        <img className="mr-3" src="https://placeimg.com/50/50/any" alt="" />
-                        <div>
-                            <h5 className="mb-1">Daffa Raihanz </h5>
-                            <p style={{fontWeight: 300}} className="mb-4">Rambut lebih dari 3cm</p>
-                            <div className="d-flex justify-content-between">
-                                <a  className="mr-3" href="#">Lihat Detail</a>
-                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">12 Januari 2020</p>
-                            </div>
-                        </div>
-                    </div>
+                    <hr></hr>
+
+                      </>
+                      )
+                    })}
                 </div>
             </CardBody>
             <CardFooter>
