@@ -16,8 +16,8 @@ const UserProfileLite = () => (
           <CardBody>
             <div className="text-center">
                 <img className="rounded-circle" src="https://placeimg.com/150/150/any"></img>
-                <h4 className="mt-3 mb-0">Lala Rara</h4>
-                <p className="m-0" style={{fontWeight: 300}}>lala@gmail.com</p>
+                <h4 className="mt-3 mb-0">Admin</h4>
+                <p className="m-0" style={{fontWeight: 300}}>admin@smktelkom-pwt.sch.id</p>
             </div>
           </CardBody>
         </Card>
