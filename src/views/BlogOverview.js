@@ -9,6 +9,7 @@ import UsersByDevice from "./../components/blog/UsersByDevice";
 import NewDraft from "./../components/blog/NewDraft";
 import Discussions from "./../components/blog/Discussions";
 import TopReferrals from "./../components/common/TopReferrals";
+import axios from 'axios'
 
 class BlogOverview extends Component {
   constructor(props) {
@@ -17,89 +18,117 @@ class BlogOverview extends Component {
         email : '',
         password : '',
         isLogin : false,
-        login : false
+        login : false,
+        data: [],
+        countPelanggaran: '',
+        countSiswa: ''
+
     }
-}
+    this.componentDidMount = this.componentDidMount.bind(this);
 
-async componentDidMount(){
-  const iniLogin = await window.localStorage.getItem('isLogin')
-  const token = await window.localStorage.getItem('token')
-
-  console.log('iniLogin', iniLogin)
-  console.log('iniLogin', token)
-  
-  if(iniLogin !== "true") {
-    console.log(iniLogin)
-    console.log(typeof iniLogin)
-    window.location.href = "/login"
   }
-}
+  async componentDidMount(){
+    const iniLogin = await window.localStorage.getItem('isLogin')
+    const token = await window.localStorage.getItem('token')
+
+    console.log('iniLogin', iniLogin)
+    console.log('iniLogin', token)
+    
+    if(iniLogin !== "true") {
+      console.log(iniLogin)
+      console.log(typeof iniLogin)
+      window.location.href = "/login"
+    }
+
+    try {
+      const baseUrl = "http://3.91.42.49";
+      const config = {
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      }
+      
+      await axios.get(
+          `${baseUrl}/api/dashboard/all`,
+          config
+      ).then(response => {
+          this.setState({ 
+            countSiswa: response.data.data.countSiswa,
+            countPelanggaran: response.data.data.countPelanggaran
+          })
+      })
+    } catch (error) {
+      // console.log(error)
+        // alert(error)
+    }
+  }
+
   render(){
     return(
-  <Container fluid className="main-content-container px-4">
-    {/* Page Header */}
-    <Row noGutters className="page-header py-4">
-      <PageTitle title="Dashboard Overview" subtitle="Dashboard" className="text-sm-left mb-3" />
-    </Row>
-    <Row>
-      <Col>
-          <Card  className="mb-4">
-                <CardBody style={{borderRadius: 6}}>
-                  <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Siswa</h6>
-                  <p style={{fontWeight:300}}>369 Siswa</p>
-                </CardBody>
-          </Card>
-      </Col>
-      <Col>
-          <Card  className="mb-4">
-                <CardBody style={{borderRadius: 6}}>
-                  <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Kelas</h6>
-                  <p style={{fontWeight:300}}>369 Siswa</p>
-                </CardBody>
-          </Card>
-      </Col>
-      <Col>
-          <Card  className="mb-4">
-                <CardBody style={{borderRadius: 6}}>
-                  <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Pelanggaran</h6>
-                  <p style={{fontWeight:300}}>369 Siswa</p>
-                </CardBody>
-          </Card>
-      </Col>
-    </Row>
-
-    {/* Small Stats Blocks */}
-    {/* <Row>
-      {smallStats.map((stats, idx) => (
-        <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
-          <SmallStats
-            id={`small-stats-${idx}`}
-            variation="1"
-            chartData={stats.datasets}
-            chartLabels={stats.chartLabels}
-            label={stats.label}
-            value={stats.value}
-            percentage={stats.percentage}
-            increase={stats.increase}
-            decrease={stats.decrease}
-          />
+    <Container fluid className="main-content-container px-4">
+      {/* Page Header */}
+      <Row noGutters className="page-header py-4">
+        <PageTitle title="Dashboard Overview" subtitle="Dashboard" className="text-sm-left mb-3" />
+      </Row>
+      <Row>
+        <Col>
+            <Card  className="mb-4">
+                  <CardBody style={{borderRadius: 6}}>
+                    <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Siswa</h6>
+                    <p style={{fontWeight:300}}>{this.state.countSiswa}</p>
+                  </CardBody>
+            </Card>
         </Col>
-      ))}
-    </Row> */}
+        <Col>
+            <Card  className="mb-4">
+                  <CardBody style={{borderRadius: 6}}>
+                    <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Kelas</h6>
+                    <p style={{fontWeight:300}}>369 Siswa</p>
+                  </CardBody>
+            </Card>
+        </Col>
+        <Col>
+            <Card  className="mb-4">
+                  <CardBody style={{borderRadius: 6}}>
+                    <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Pelanggaran</h6>
+                    <p style={{fontWeight:300}}>{this.state.countPelanggaran}</p>
+                  </CardBody>
+            </Card>
+        </Col>
+      </Row>
 
-    <Row>
-      {/* Users by Device */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <UsersByDevice />
-      </Col>
+      {/* Small Stats Blocks */}
+      {/* <Row>
+        {smallStats.map((stats, idx) => (
+          <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
+            <SmallStats
+              id={`small-stats-${idx}`}
+              variation="1"
+              chartData={stats.datasets}
+              chartLabels={stats.chartLabels}
+              label={stats.label}
+              value={stats.value}
+              percentage={stats.percentage}
+              increase={stats.increase}
+              decrease={stats.decrease}
+            />
+          </Col>
+        ))}
+      </Row> */}
 
-      {/* Discussions */}
-      <Col lg="" md="12" sm="12" className="mb-4">
-        <Discussions />
-      </Col>
+      <Row>
+        {/* Users by Device */}
+        {/* <Col lg="4" md="6" sm="12" className="mb-4">
+          <UsersByDevice />
+        </Col> */}
 
-    </Row>
-  </Container>
+        {/* Discussions */}
+        <Col lg="12" md="12" sm="12" className="mb-4">
+          <Discussions />
+        </Col>
+
+      </Row>
+    </Container>
     )
   }
 }
