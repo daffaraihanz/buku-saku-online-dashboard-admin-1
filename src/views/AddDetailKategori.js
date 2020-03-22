@@ -8,13 +8,15 @@ class AddDetailKategori extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            kelas: '',
-            wali_kelas: '',
-            jurusan: ''
+            kode: '',
+            jenis_pelanggaran: '',
+            point: '',
+            kategori: '',
+            tag: ''
         };
         
         this.handleChange = this.handleChange.bind(this);
-        this.addKelas = this.addKelas.bind(this);
+        this.addPoint = this.addPoint.bind(this);
     }
 
     handleChange = (event)=> {
@@ -22,7 +24,7 @@ class AddDetailKategori extends Component{
         console.log(event)
     }
 
-    async addKelas() {
+    async addPoint() {
         try {
             const baseUrl = 'http://3.91.42.49'
             const token = localStorage.getItem('token')
@@ -32,17 +34,11 @@ class AddDetailKategori extends Component{
                 }
             }
 
-            let model = {
-                kelas: this.state.kelas,
-                wali_kelas: this.state.wali_kelas,
-                jurusan: this.state.jurusan
-            }
-            console.log(model)
-            const query = await axios.post(`${baseUrl}/api/kelas/create`,model, config)
+            const query = await axios.post(`${baseUrl}/api/point/create`,this.state, config)
             console.log(query)
             if(query.data.code <= 200){
                 alert('Sukses Tambah Kelas')
-                document.location.href = "/data-siswa"                  
+                document.location.href = "/daftar-point"                  
             } else {
               alert('ERROR Ada yang salah')
             }
@@ -52,7 +48,7 @@ class AddDetailKategori extends Component{
     }
 
     toDetailKategori(){
-        document.location.href = "/detail-kategori"
+        document.location.href = "/daftar-point"
     }
     render(){
         return(
@@ -72,16 +68,53 @@ class AddDetailKategori extends Component{
                                 <Row form>
                                     {/* NIS */}
                                     <Col lg="6" md="8" className="form-group">
-                                    <label htmlFor="feFirstName">Isi Detail Kategori</label>
-                                    <FormInput
-                                        name="kelas"
-                                        placeholder="Masukan Detail Kategori"
-                                        // value={this.state.name}
-                                        onChange={this.handleChange}
-                                    />
+                                        <label htmlFor="feFirstName">Kode</label>
+                                        <FormInput
+                                            className="mb-3"
+                                            name="kode"
+                                            placeholder="Masukan Kode"
+                                            // value={this.state.name}
+                                            onChange={this.handleChange}
+                                        />
+
+                                        <label htmlFor="feFirstName">Jenis Pelanggaran</label>
+                                        <FormInput
+                                            className="mb-3"
+                                            name="jenis_pelanggaran"
+                                            placeholder="Masukan Jenis Pelanggaran"
+                                            // value={this.state.name}
+                                            onChange={this.handleChange}
+                                        />
+
+                                        <label htmlFor="feFirstName">Point</label>
+                                        <FormInput
+                                            className="mb-3"
+                                            name="point"
+                                            placeholder="Masukan Point"
+                                            // value={this.state.name}
+                                            onChange={this.handleChange}
+                                        />
+
+                                        <label htmlFor="feFirstName">Kategori</label>
+                                        <FormInput
+                                            className="mb-3"
+                                            name="kategori"
+                                            placeholder="Masukan Kategori"
+                                            // value={this.state.name}
+                                            onChange={this.handleChange}
+                                        />
+
+                                        <label htmlFor="feFirstName">Tag</label>
+                                        <FormInput
+                                            className="mb-3"
+                                            name="tag"
+                                            placeholder="Pilih pelanggaran atau prestasi"
+                                            // value={this.state.name}
+                                            onChange={this.handleChange}
+                                        />
                                     </Col>
                                 </Row>
-                                <Button  theme="accent" onClick={this.toAddAyat}>Tambah Detail Kategori</Button>
+                                <Button  theme="accent" onClick={this.addPoint}>Tambah Daftar Point</Button>
                             </Form>
                         </Col>
                         </Row>
