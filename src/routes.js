@@ -26,6 +26,7 @@ import AddBab from "./views/AddBab";
 import AddPasal from "./views/AddPasal";
 import AddAyat from "./views/AddAyat";
 import Riwayat from "./views/RiwayatPelanggaran";
+import DetailRiwayat from "./views/DetailRiwayat";
 export default [
   {
     path: "/",
@@ -127,5 +128,15 @@ export default [
     path: "/riwayat",
     layout: DefaultLayout,
     component: Riwayat
+  },
+  {
+    path: "/detail-riwayat",
+    layout: DefaultLayout,
+    component: DetailRiwayat
+  },
+  {
+    path: "/add-ayat",
+    layout: DefaultLayout,
+    component: AddAyat
   },
 ];
