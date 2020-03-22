@@ -1,7 +1,53 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody,Button,ListGroup,ListGroupItem,Form,FormInput,CardHeadr } from "shards-react";
+import axios from 'axios'
 
 class DetailRiwayat extends Component{
+    constructor () {
+        super();
+        this.state = {
+            data: '',
+            id: '',
+            image: '',
+            pelanggaran: {
+                kategori: '',
+                point: '',
+                kode: ''
+            },
+            pelapor: {
+                nama: ''
+            },
+            user: {
+                kelas: '',
+                nama: '',
+                nis: ''
+            }
+        };
+
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
+
+    async componentDidMount() {
+        try {
+            const baseUrl = "http://3.91.42.49";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+    
+            let id = await this.props.location.state
+            
+            await axios.get(
+                `${baseUrl}/api/lapor?id=${id}`,
+                config
+            ).then(response => {
+                this.setState(response.data.data)
+            })
+        } catch (error) {
+            alert(error)
+        }
+    }
 
     toRiwayat(){
         document.location.href = "/riwayat"
@@ -25,44 +71,43 @@ class DetailRiwayat extends Component{
                         <Col>
                             <Form className>
                                 <div className="">
-                                    <img className="rounded mb-3" src="https://placeimg.com/322/187/any"></img>
+                                    <img className="rounded mb-3" src={`http://${this.state.image}`} style={{maxWidth: "700px"}}></img>
                                     <div>
                                         <Row >
                                             {/* NIS */}
                                             <Col lg="3" md="8">
                                                 <h6 className="mb-1" htmlFor="feFirstName">Nama Lengkap</h6>
-                                                <p>Fiony Alveria</p>
+                                                <p>{this.state.user.nama}</p>
                                             </Col>
                                             <Col lg="3" md="8">
                                                 <h6 className="mb-1" htmlFor="feFirstName">Kelas</h6>
-                                                <p>XII RPL 7</p>
+                                                <p>{this.state.user.kelas}</p>
                                             </Col>
                                         </Row>
                                         <Row >
                                             {/* NIS */}
                                             <Col lg="3" md="8">
                                                 <h6 className="mb-1" htmlFor="feFirstName">Kategori Pelanggaran</h6>
-                                                <p>Rambut</p>
+                                                <p>{this.state.pelanggaran.kategori}</p>
                                             </Col>
                                             <Col lg="3" md="8">
                                                 <h6 className="mb-1" htmlFor="feFirstName">Poin Pelanggaran</h6>
-                                                <p>5</p>
+                                                <p>{this.state.pelanggaran.point}</p>
                                             </Col>
                                         </Row>
                                         <Row >
                                             {/* NIS */}
                                             <Col lg="3" md="8">
-                                                <h6 className="mb-1" htmlFor="feFirstName">Aturan yang dilanggar</h6>
-                                                <p>Rambut lebih dari 3cm</p>
+                                                <h6 className="mb-1" htmlFor="feFirstName">Kode</h6>
+                                                <p>{this.state.pelanggaran.kode}</p>
                                             </Col>
                                             <Col lg="3" md="8">
                                                 <h6 className="mb-1" htmlFor="feFirstName">Pelapor</h6>
-                                                <p>Bayu Aji Sukma</p>
+                                                <p>{this.state.pelapor.nama}</p>
                                             </Col>
                                         </Row>
                                     </div>
                                 </div>
-                                {/* <Button  theme="accent" onClick={this.addKelas}>Tambah Kelas</Button> */}
                             </Form>
                         </Col>
                         </Row>
