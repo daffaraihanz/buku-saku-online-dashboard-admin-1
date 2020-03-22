@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
 import { Container, Row, Col, Card, Button, CardBody, ButtonGroup, FormInput, FormGroup, CardFooter } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
+import axios from 'axios'
 
 class DataLala extends Component{
     constructor () {
         super();
         this.state = {
           modalHapus: true,
-          modalEdit: true
+          modalEdit: true,
+          idHapus: '',
+          data: []
         };
         this.alertHapus = this.alertHapus.bind(this);
         this.alertEdit = this.alertEdit.bind(this);
-      }
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.toDetail = this.toDetail.bind(this);
+    }
 
     alertHapus (){
         if( this.state.modalHapus === true){
@@ -25,7 +30,7 @@ class DataLala extends Component{
         }
       }
     
-      alertEdit (){
+    alertEdit (){
         if( this.state.modalEdit === true){
           this.setState({
             modalEdit: false
@@ -35,15 +40,46 @@ class DataLala extends Component{
               modalEdit: true
             })
         }
-      }
+    }
 
-      toDataAyat(){
+    toDataAyat(){
         document.location.href = './data-ayat'
-      }
+    }
 
-      toAddPasal(){
+    toAddPasal(){
         document.location.href = './add-pasal'
+    }
+
+    async componentDidMount() {
+      try {
+        const baseUrl = "http://3.91.42.49";
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+        let id = this.props.location.state
+        await this.setState({
+          idHapus: id
+        })
+        
+        await axios.get(
+            `${baseUrl}/api/peraturan?id=${id}`,
+            config
+        ).then(response => {
+            this.setState({ data: response.data.data.pasal })
+        })
+      } catch (error) {
+          alert(error)
       }
+    }
+
+    async toDetail() {
+      this.props.history.push({
+        pathname: '/data-ayat',
+        state: this.state.idHapus
+      })
+    }
 
     render(){
         return(
@@ -61,16 +97,18 @@ class DataLala extends Component{
                     </Col>
                 </Row>
                  <Row>
-                    <Col lg="4" md="6">
+                   {this.state.data.map((item,key) => {
+                     return(
+                    <Col lg="4" md="6" key={key}>
                     <Card className="mb-4 nana">
                         <CardBody  className="border-bottom" style={{ padding: 24,background: 'white',borderRadius: 6}}>
                             <div className="d-flex justify-content-between" style={{alignItems: 'center'}}>
                               <a onClick={this.toDataLala} href="#">
-                                  <h6 className="mb-0" style={{color: '#3d5170', fontWeight: '600'}}>PASAL 1 Tempat Pelaksanaan KBM</h6>
+                                  <h6 className="mb-0" style={{color: '#3d5170', fontWeight: '600'}}>{item.title}</h6>
                               </a>
                             </div>
                               <div className="d-flex justify-content-between align-items-center mt-5">
-                                <a href="#" onClick={this.toDataAyat}>
+                                <a href="#" onClick={this.toDetail}>
                                   Lihat Detail
                                 </a>
                                 <div>
@@ -89,6 +127,8 @@ class DataLala extends Component{
                         </CardBody>
                     </Card>
                     </Col>
+                    )
+                   })}
                 </Row>
                 {/* Alert */}
               <Row form className="justify-content-center" style={{display: this.state.modalHapus ? 'none' : 'flex', zIndex: 9999, position: 'relative'}}>

@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, CardHeader, CardBody,Button,InputGroupAddon,
 import PageTitle from "../components/common/PageTitle";
 import axios from 'axios'
 
-class DataAyat extends Component {
+class DetailKategori extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -83,17 +83,21 @@ class DataAyat extends Component {
             alert(error)
         }
     }
+
+    toAddKategori(){
+        document.location.href = "/add-detail-kategori"
+    }
     render(){
         return(
             <Container fluid className="main-content-container px-4">
                  <Row noGutters className="page-header py-4">
-                    <PageTitle sm="4" title="Daftar Ayat" subtitle="Buku Saku Online" className="text-sm-left" />
+                    <PageTitle sm="4" title="Daftar Point" subtitle="Buku Saku Online" className="text-sm-left" />
                 </Row>
                 <Row className="mb-2">
                     <Col>
                         <div className="d-flex justify-content-end">
-                            <Button theme="primary"  onClick={this.toAddAyat} className="mb-2">
-                                <i className="material-icons mr-1">add</i> Tambah Ayat
+                            <Button theme="primary"  onClick={this.toAddKategori} className="mb-2">
+                                <i className="material-icons mr-1">add</i> Tambah Detail Kategori
                             </Button>
                         </div>
                     </Col>
@@ -106,7 +110,7 @@ class DataAyat extends Component {
                             No.
                         </th>
                         <th scope="col" className="border-0 text-white">
-                            Isi Ayat
+                            Detail Kategori
                         </th>
                         <th scope="col" className="border-0 text-white">
                             Action
@@ -114,33 +118,18 @@ class DataAyat extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.data.map((item,key) => {
-                        return(
-                            <>
-                            {item.desc.map((value, kunci) => {
-                                return(
-                                    <>
-                                    <tr key={kunci}>
-                                        <td>{kunci + 1}</td>
-                                        <td>{value.descPasal}</td>
-                                        <td>
-                                        <Button onClick={this.alertEdit} theme="primary" className="mb-2 mr-2">
-                                            Edit
-                                        </Button>
-                                        <Button onClick={this.alertHapus}theme="danger" className="mb-2">
-                                            Delete
-                                        </Button>
-                                        </td>
-                                    </tr>
-                                    </>
-
-                                )
-
-                            })}
-
-                            </>
-                        )
-                    })}
+                    <tr>
+                        <td>1</td>
+                        <td>Delaaa</td>
+                        <td>
+                            <Button onClick={this.alertEdit} theme="primary" className="mb-2 mr-2">
+                                Edit
+                            </Button>
+                            <Button onClick={this.alertHapus}theme="danger" className="mb-2">
+                                Delete
+                            </Button>
+                        </td>
+                    </tr>
                 </tbody>
                 </table>
             </Row>
@@ -164,8 +153,8 @@ class DataAyat extends Component {
                     <Card>
                     <CardBody>
                     <FormGroup>
-                        <label htmlFor="judul">Masukkan Ayat Baru</label>
-                        <textarea style={{width: '100%'}} className="mb-3" id="judul" placeholder="Ayat Baru"></textarea>
+                        <label htmlFor="judul">Masukkan Detail Kategori Baru</label>
+                        <textarea style={{width: '100%'}} className="mb-3" id="judul" placeholder="Detail Kategori Baru"></textarea>
                     </FormGroup>
                     <div className="mt-2">
                         <Button className="btn btn-primary mr-2" onClick={this.alertEdit}>Simpan</Button>
@@ -181,4 +170,4 @@ class DataAyat extends Component {
     }
 }
 
-export default DataAyat;
+export default DetailKategori;

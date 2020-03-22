@@ -37,9 +37,14 @@ export default function() {
       to: "/riwayat",
     },
     {
-      title: "Tambah Point Siswa",
+      title: "Lapor Prestasi",
       htmlBefore: '<i class="material-icons">control_point</i>',
-      to: "/tambah-point",
+      to: "/lapor-prestasi",
+    },
+    {
+      title: "Daftar Point",
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: "/daftar-point",
     },
     {
       title: "Profil",

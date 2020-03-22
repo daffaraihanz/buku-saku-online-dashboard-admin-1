@@ -27,6 +27,11 @@ import AddPasal from "./views/AddPasal";
 import AddAyat from "./views/AddAyat";
 import Riwayat from "./views/RiwayatPelanggaran";
 import DetailRiwayat from "./views/DetailRiwayat";
+import LaporPrestasi from "./views/LaporPrestasi";
+import DaftarPoint from "./views/DaftarPoint";
+import Kategori from "./views/Kategori";
+import DetailKategori from "./views/DetailKategori";
+import AddDetailKategori from "./views/AddDetailKategori";
 export default [
   {
     path: "/",
@@ -138,5 +143,30 @@ export default [
     path: "/add-ayat",
     layout: DefaultLayout,
     component: AddAyat
+  },
+  {
+    path: "/lapor-prestasi",
+    layout: DefaultLayout,
+    component: LaporPrestasi
+  },
+  {
+    path: "/daftar-point",
+    layout: DefaultLayout,
+    component: DaftarPoint
+  },
+  {
+    path: "/kategori",
+    layout: DefaultLayout,
+    component: Kategori
+  },
+  {
+    path: "/detail-kategori",
+    layout: DefaultLayout,
+    component: DetailKategori
+  },
+  {
+    path: "/add-detail-kategori",
+    layout: DefaultLayout,
+    component: AddDetailKategori
   },
 ];
