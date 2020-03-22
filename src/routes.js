@@ -26,6 +26,7 @@ import AddBab from "./views/AddBab";
 import AddPasal from "./views/AddPasal";
 import AddAyat from "./views/AddAyat";
 import Riwayat from "./views/RiwayatPelanggaran";
+import LaporPrestasi from "./views/LaporPrestasi";
 export default [
   {
     path: "/",
@@ -128,4 +129,9 @@ export default [
     layout: DefaultLayout,
     component: Riwayat
   },
+  {
+    path: "/lapor-prestasi",
+    layout: DefaultLayout,
+    component: LaporPrestasi
+  }
 ];
