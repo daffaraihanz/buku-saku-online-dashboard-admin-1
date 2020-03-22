@@ -1,4 +1,4 @@
-import React from "react";
+import React,{Component} from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -11,76 +11,75 @@ import {
   Col
 } from "shards-react";
 
-const Discussions = ({ title, discussions }) => (
-  <Card small className="blog-comments">
-    <CardHeader className="border-bottom">
-      <h6 className="m-0">{title}</h6>
-    </CardHeader>
+class Discussions extends Component {
 
-    <CardBody className="p-0">
-      {discussions.map((discussion, idx) => (
-        <div key={idx} className="blog-comments__item d-flex p-3">
-          {/* Avatar */}
-          <div className="blog-comments__avatar mr-3">
-            <img src={discussion.author.image} alt={discussion.author.name} />
-          </div>
+  toRiwayat(){
+    document.location.href= "/riwayat"
+  }
+      render(){
+        return(
+          <Card small className="blog-comments">
+            <CardHeader className="border-bottom">
+              <h6 className="m-0">Riwayat</h6>
+            </CardHeader>
+            <CardBody className="p-3">
+                <div className="mb-4 border-bottom pb-3">
+                    {/* Avatar */}
+                    <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
+                        <img className="mr-3" src="https://placeimg.com/50/50/any" alt="" />
+                        <div>
+                            <h5 className="mb-1">Daffa Raihanz </h5>
+                            <p style={{fontWeight: 300}} className="mb-4">Rambut lebih dari 3cm</p>
+                            <div className="d-flex justify-content-between">
+                                <a  className="mr-3" href="#">Lihat Detail</a>
+                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">12 Januari 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="mb-4 border-bottom pb-3">
+                    {/* Avatar */}
+                    <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
+                        <img className="mr-3" src="https://placeimg.com/50/50/any" alt="" />
+                        <div>
+                            <h5 className="mb-1">Daffa Raihanz </h5>
+                            <p style={{fontWeight: 300}} className="mb-4">Rambut lebih dari 3cm</p>
+                            <div className="d-flex justify-content-between">
+                                <a  className="mr-3" href="#">Lihat Detail</a>
+                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">12 Januari 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="mb-4 border-bottom pb-3">
+                    {/* Avatar */}
+                    <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
+                        <img className="mr-3" src="https://placeimg.com/50/50/any" alt="" />
+                        <div>
+                            <h5 className="mb-1">Daffa Raihanz </h5>
+                            <p style={{fontWeight: 300}} className="mb-4">Rambut lebih dari 3cm</p>
+                            <div className="d-flex justify-content-between">
+                                <a  className="mr-3" href="#">Lihat Detail</a>
+                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">12 Januari 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CardBody>
+            <CardFooter>
+              <Row>
+                <Col className=" view-report">
+                  <Button theme="white" type="submit" onClick={this.toRiwayat}>
+                    Lihat Semua Riwayat
+                  </Button>
+                </Col>
+              </Row>
+            </CardFooter>
+          </Card>
 
-          {/* Content */}
-          <div className="blog-comments__content">
-            {/* Content :: Title */}
-            <div className="blog-comments__meta text-mutes">
-              <a className="text-secondary" href={discussion.author.url}>
-                {discussion.author.name}
-              </a>{" "}
-              on{" "}
-              <a className="text-secondary" href={discussion.post.url}>
-                {discussion.post.title}
-              </a>
-              <span className="text-mutes">- {discussion.date}</span>
-            </div>
-
-            {/* Content :: Body */}
-            <p className="m-0 my-1 mb-2 text-muted">{discussion.body}</p>
-
-            {/* Content :: Actions */}
-            <div className="blog-comments__actions">
-              <ButtonGroup size="sm">
-                <Button theme="white">
-                  <span className="text-success">
-                    <i className="material-icons">check</i>
-                  </span>{" "}
-                  Approve
-                </Button>
-                <Button theme="white">
-                  <span className="text-danger">
-                    <i className="material-icons">clear</i>
-                  </span>{" "}
-                  Reject
-                </Button>
-                <Button theme="white">
-                  <span className="text-light">
-                    <i className="material-icons">more_vert</i>
-                  </span>{" "}
-                  Edit
-                </Button>
-              </ButtonGroup>
-            </div>
-          </div>
-        </div>
-      ))}
-    </CardBody>
-
-    <CardFooter className="border-top">
-      <Row>
-        <Col className="text-center view-report">
-          <Button theme="white" type="submit">
-            View All Comments
-          </Button>
-        </Col>
-      </Row>
-    </CardFooter>
-  </Card>
-);
+        )
+      }
+}
 
 Discussions.propTypes = {
   /**

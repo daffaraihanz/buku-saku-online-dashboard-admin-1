@@ -1,9 +1,9 @@
 export default function() {
   return [
     {
-      title: "Dashboard",
+      title: "Home",
       to: "/dashboard",
-      htmlBefore: '<i class="material-icons">edit</i>',
+      htmlBefore: '<i class="material-icons">home</i>',
       htmlAfter: ""
     },
     // {

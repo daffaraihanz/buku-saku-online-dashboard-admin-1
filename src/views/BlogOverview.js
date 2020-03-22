@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col } from "shards-react";
+import { Container, Row, Col ,Card,CardBody} from "shards-react";
 
 import PageTitle from "./../components/common/PageTitle";
 import SmallStats from "./../components/common/SmallStats";
@@ -39,7 +39,33 @@ async componentDidMount(){
   <Container fluid className="main-content-container px-4">
     {/* Page Header */}
     <Row noGutters className="page-header py-4">
-      <PageTitle title="Blog Overview" subtitle="Dashboard" className="text-sm-left mb-3" />
+      <PageTitle title="Dashboard Overview" subtitle="Dashboard" className="text-sm-left mb-3" />
+    </Row>
+    <Row>
+      <Col>
+          <Card  className="mb-4">
+                <CardBody style={{borderRadius: 6}}>
+                  <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Siswa</h6>
+                  <p style={{fontWeight:300}}>369 Siswa</p>
+                </CardBody>
+          </Card>
+      </Col>
+      <Col>
+          <Card  className="mb-4">
+                <CardBody style={{borderRadius: 6}}>
+                  <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Kelas</h6>
+                  <p style={{fontWeight:300}}>369 Siswa</p>
+                </CardBody>
+          </Card>
+      </Col>
+      <Col>
+          <Card  className="mb-4">
+                <CardBody style={{borderRadius: 6}}>
+                  <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Pelanggaran</h6>
+                  <p style={{fontWeight:300}}>369 Siswa</p>
+                </CardBody>
+          </Card>
+      </Col>
     </Row>
 
     {/* Small Stats Blocks */}
@@ -62,30 +88,16 @@ async componentDidMount(){
     </Row> */}
 
     <Row>
-      {/* Users Overview */}
-      <Col lg="8" md="12" sm="12" className="mb-4">
-        <UsersOverview />
-      </Col>
-
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
         <UsersByDevice />
       </Col>
 
-      {/* New Draft */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <NewDraft />
-      </Col>
-
       {/* Discussions */}
-      <Col lg="5" md="12" sm="12" className="mb-4">
+      <Col lg="" md="12" sm="12" className="mb-4">
         <Discussions />
       </Col>
 
-      {/* Top Referrals */}
-      <Col lg="3" md="12" sm="12" className="mb-4">
-        <TopReferrals />
-      </Col>
     </Row>
   </Container>
     )
