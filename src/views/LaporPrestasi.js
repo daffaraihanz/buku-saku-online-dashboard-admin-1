@@ -7,6 +7,7 @@ class LaporPrestasi extends Component{
         super();
         this.state = {
           data: [],
+          jenis: [],
           nis: '',
           kategori: '',
           jenis_pelanggaran: ''
@@ -14,6 +15,8 @@ class LaporPrestasi extends Component{
 
         this.componentDidMount = this.componentDidMount.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleDrop = this.handleDrop.bind(this)
+        this.post = this.post.bind(this)
     }
 
     async componentDidMount() {
@@ -41,9 +44,60 @@ class LaporPrestasi extends Component{
 
     handleChange = (event)=> {
         this.setState({[event.target.name]: event.target.value });
-        console.log(event)
+        // console.log(this.state.kategori)
+    }
+    handleDrop = async (event)=> {
+        // this.setState({[event.target.name]: event.target.value });
+        try {
+            const baseUrl = "http://3.91.42.49";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+            
+            await axios.get(
+                `${baseUrl}/api/point/kategori?kategori=${event.target.value}`,
+                config
+            ).then(response => {
+                console.log(response)
+                this.setState({ jenis: response.data.data })
+            })
+
+            console.log(this.state.kategori,['kategori'])
+        } catch (error) {
+            alert(error)
+        }
     }
 
+    post = async () =>{
+        try {
+            console.log("tryy")
+            const baseUrl = "http://3.91.42.49";
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            }
+            
+            await axios.post(
+                `${baseUrl}/api/lapor/prestasi`,this.state,
+                config
+            ).then(response => {
+                console.log(response)
+                if(response.data.code === 200){
+                    alert("Sukses")
+                }else{
+                    alert("error")
+                }
+                // this.setState({ jenis: response.data.data })
+            })
+
+            console.log(this.state.kategori,['kategori'])
+        } catch (error) {
+            alert(error)
+        }
+    }
     render(){
         return(
             <Container fluid className="main-content-container">
@@ -73,10 +127,10 @@ class LaporPrestasi extends Component{
                                 <Row form>
                                     <Col lg="6" md="8" className="form-group">
                                     <label htmlFor="kategori">Kategori</label>
-                                        <FormSelect id="kategori">
+                                        <FormSelect id="kategori" onChange={this.handleDrop} name="kategori">
                                             {this.state.data.map((item,key) => {
                                             return(
-                                                <option onChange={this.handleChange} name="kategori">{item.kategori}</option>
+                                                <option  name="kategori">{item.kategori}</option>
                                                 )
 
                                             })}
@@ -86,14 +140,17 @@ class LaporPrestasi extends Component{
                                 <Row form>
                                     <Col lg="6" md="8" className="form-group">
                                     <label htmlFor="jenis">Jenis Prestasi</label>
-                                    <FormSelect id="jenis">
-                                        <option>Pilih jenis prestasi ...</option>
-                                        <option>Berpkaian</option>
-                                        <option>Blabla</option>
+                                    <FormSelect id="jenis_pelanggaran" onChange={this.handleChange} name="jenis_pelanggaran">
+                                        {this.state.jenis.map((item,key) => {
+                                            return(
+                                                <option  name="kategori">{item.jenis_pelanggaran}</option>
+                                                )
+
+                                            })}
                                     </FormSelect>
                                     </Col>
                                 </Row>
-                                <Button  theme="accent" onClick={this.registerUser}>Submit</Button>
+                                <Button  theme="accent" onClick={this.post}>Submit</Button>
                             </Form>
                         </Col>
                         </Row>
