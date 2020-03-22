@@ -17,6 +17,11 @@ export default function() {
     //   to: "/components-overview",
     // },
     {
+      title: "Riwayat",
+      htmlBefore: '<i class="material-icons">history</i>',
+      to: "/riwayat",
+    },
+    {
       title: "Data Pasal",
       htmlBefore: '<i class="material-icons">book</i>',
       to: "/data-pasal",
@@ -27,24 +32,19 @@ export default function() {
       to: "/data-siswa",
     },
     {
+      title: "Data Point",
+      htmlBefore: '<i class="material-icons">note</i>',
+      to: "/daftar-point",
+    },
+    {
       title: "Tambah Admin",
       htmlBefore: '<i class="material-icons">note_add</i>',
       to: "/data-admin",
     },
     {
-      title: "Riwayat Pelanggaran",
-      htmlBefore: '<i class="material-icons">history</i>',
-      to: "/riwayat",
-    },
-    {
       title: "Lapor Prestasi",
       htmlBefore: '<i class="material-icons">control_point</i>',
       to: "/lapor-prestasi",
-    },
-    {
-      title: "Daftar Point",
-      htmlBefore: '<i class="material-icons">person</i>',
-      to: "/daftar-point",
     },
     {
       title: "Profil",
