@@ -80,6 +80,11 @@ export default [
     component: Tables
   },
   {
+    path: "/daftar-point",
+    layout: DefaultLayout,
+    component: DaftarPoint
+  },
+  {
     path: "/blog-posts",
     layout: DefaultLayout,
     component: BlogPosts
@@ -148,11 +153,6 @@ export default [
     path: "/lapor-prestasi",
     layout: DefaultLayout,
     component: LaporPrestasi
-  },
-  {
-    path: "/daftar-point",
-    layout: DefaultLayout,
-    component: DaftarPoint
   },
   {
     path: "/kategori",
