@@ -54,8 +54,8 @@ login = (e) => {
 
 render(){
 return(
-    <Row className="p-5 justify-content-center m-0">
-        <Col lg="4" md="6" style={{ marginTop:100 }}>
+    <Row className="py-5 justify-content-center m-0">
+        <Col lg="4" md="7" style={{ marginTop:100 }}>
             <Card small className="mb-4">
                 <CardHeader className="border-bottom text-center">
                     <h6 className="m-0">Login</h6>

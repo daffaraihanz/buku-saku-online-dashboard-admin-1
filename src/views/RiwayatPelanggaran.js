@@ -62,7 +62,7 @@ class RiwayatPelanggaran extends Component{
                                             <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
                                                 <img className="mr-3" src={`http://${item.image}`} alt="" />
                                                 <div>
-                                                    <h5 className="mb-1">{item.user.name}</h5>
+                                                    <h5 className="mb-1">{item.user.nama}</h5>
                                                     <p style={{fontWeight: 300}} className="mb-4">{item.pelanggaran.kategori}</p>
                                                     <div className="d-flex justify-content-between">
                                                         <a onClick={() => this.toDetailRiwayat(item._id)} className="mr-3" href="#">Lihat Detail</a>
