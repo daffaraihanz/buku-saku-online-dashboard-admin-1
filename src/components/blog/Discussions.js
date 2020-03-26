@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React,{Component, Fragment} from "react";
 import PropTypes from "prop-types";
 import {
   Card,
@@ -66,24 +66,14 @@ class Discussions extends Component {
               <h6 className="m-0">Riwayat</h6>
             </CardHeader>
             <CardBody className="p-3">
-                <div className="mb-4 border-bottom pb-3">
+                <div className="mb-4 pb-3">
                     {/* Avatar */}
                     {this.state.data.map((item,key) => {
                       return(
                         <>
-                        
-                    <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
-                        <img className="mr-3" src={`http://${item.image}`} alt="" />
-                        <div>
-                            <h6 className="mb-1">{item.user.nama}</h6>
-                            <p style={{fontWeight: 300}} className="mb-4">{item.pelanggaran.kategori}</p>
-                            <div className="d-flex justify-content-between mb-3 mt--1">
-                                {/* <a  className="mr-3" href="#" onClick={() => this.toDetailRiwayat(item._id)}>Lihat Detail</a> */}
-                                <p style={{position: 'absolute',right: 0}} className="mb-1 ">{item.createdDate}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr></hr>
+                        <Fragment>
+                          <h5>INDEVELOP</h5>
+                        </Fragment>
 
                       </>
                       )

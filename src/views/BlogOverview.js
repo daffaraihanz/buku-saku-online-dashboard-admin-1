@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col ,Card,CardBody} from "shards-react";
+import { Container, Row, Col ,Card,CardBody,} from "shards-react";
 
 import PageTitle from "./../components/common/PageTitle";
 import SmallStats from "./../components/common/SmallStats";
@@ -8,8 +8,10 @@ import UsersOverview from "./../components/blog/UsersOverview";
 import UsersByDevice from "./../components/blog/UsersByDevice";
 import NewDraft from "./../components/blog/NewDraft";
 import Discussions from "./../components/blog/Discussions";
+import Activity from "./../components/blog/Activity";
 import TopReferrals from "./../components/common/TopReferrals";
 import axios from 'axios'
+import IMAGES from "../images/images";
 
 class BlogOverview extends Component {
   constructor(props) {
@@ -70,32 +72,62 @@ class BlogOverview extends Component {
       <Row noGutters className="page-header py-4">
         <PageTitle title="Dashboard Overview" subtitle="Dashboard" className="text-sm-left mb-3" />
       </Row>
+        <Card className="card-welcome mb-4">
+          <CardBody className="px-3">
+            <Row className="align-items-center p-3">
+                  <Col lg="6" sm="12">
+                    <div>
+                        <h4 style={{fontWeight: 'bold', color: '#fff'}}>Hallo Nana! <br/> Selamat Datang di Dashboard Buku Online</h4>
+                        <p style={{fontWeight: 300, color: '#656478'}}>Lorem ipsum dolor sit amet consectetur adipisicing  elit. <br/> Excepturi assumenda perspiciatis nam ea hic nesciunt, <br/>veritatis cumque corporis porro velit.</p>
+                      </div>
+                  </Col>
+                  <Col className="test">
+                      <img
+                          className="ilus img-fluid"
+                          // style={{ maxWidth: "25px" }}
+                          src={IMAGES.welcome2}
+                          alt="Bukusaku Dashboard"
+                        />
+                  </Col>
+            </Row>
+          </CardBody>
+        </Card>
       <Row>
         <Col>
-            <Card  className="mb-4">
-                  <CardBody style={{borderRadius: 6}}>
-                    <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Siswa</h6>
-                    <p style={{fontWeight:300}}>{this.state.countSiswa}</p>
+            <Card  className="mb-4" style={{backgroundColor: '#543EB2', borderRadius: 20,}}>
+                  <CardBody style={{borderRadius: 6}} className="d-flex align-items-center">
+                    <h3 className="number-box">01</h3>
+                    <div>
+                      <p className="mb-2" style={{fontWeight: '600',color: '#CDCBDD'}}>Jumlah Siswa</p>
+                      <h5 className="text-white mb-0" style={{}}>{this.state.countSiswa}</h5>
+                    </div>
                   </CardBody>
             </Card>
         </Col>
         <Col>
-            <Card  className="mb-4">
-                  <CardBody style={{borderRadius: 6}}>
-                    <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Kelas</h6>
-                    <p style={{fontWeight:300}}>369 Siswa</p>
+            <Card  className="mb-4" style={{backgroundColor: '#9992DB', borderRadius: 20}}>
+                  <CardBody style={{borderRadius: 6}} className="d-flex align-items-center">
+                    <h3 className="number-box">02</h3>
+                    <div>
+                      <p className="mb-2" style={{fontWeight: '600',color: '#CDCBDD'}}>Jumlah Kelas</p>
+                      <h5 className="text-white mb-0" style={{}}>369</h5>
+                    </div>
                   </CardBody>
             </Card>
         </Col>
         <Col>
-            <Card  className="mb-4">
-                  <CardBody style={{borderRadius: 6}}>
-                    <h6 className="mb-0" style={{fontWeight: '600'}}>Jumlah Pelanggaran</h6>
-                    <p style={{fontWeight:300}}>{this.state.countPelanggaran}</p>
+            <Card  className="mb-4" style={{backgroundColor: '#FF7484', borderRadius: 20}}>
+                  <CardBody style={{borderRadius: 6}} className="d-flex align-items-center">
+                    <h3 className="number-box">03</h3>
+                    <div>
+                      <p className="mb-2" style={{fontWeight: '600',color: '#CDCBDD'}}>Jumlah Pelanggaran</p>
+                      <h5 className="text-white mb-0" style={{}}>{this.state.countPelanggaran}</h5>
+                    </div>
                   </CardBody>
             </Card>
         </Col>
       </Row>
+      
 
       {/* Small Stats Blocks */}
       {/* <Row>
@@ -123,7 +155,10 @@ class BlogOverview extends Component {
         </Col> */}
 
         {/* Discussions */}
-        <Col lg="12" md="12" sm="12" className="mb-4">
+        <Col className="mb-4">
+          <Activity />
+        </Col>
+        <Col lg="6" md="12" sm="12" className="mb-4">
           <Discussions />
         </Col>
 

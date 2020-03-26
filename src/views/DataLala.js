@@ -104,7 +104,7 @@ class DataLala extends Component{
                         <CardBody  className="border-bottom" style={{ padding: 24,background: 'white',borderRadius: 6}}>
                             <div className="d-flex justify-content-between" style={{alignItems: 'center'}}>
                               <a onClick={this.toDataLala} href="#">
-                                  <h6 className="mb-0" style={{color: '#3d5170', fontWeight: '600'}}>{item.title}</h6>
+                                  <h6 className="mb-0 max-length" style={{color: '#3d5170', fontWeight: '600'}}>{item.title}</h6>
                               </a>
                             </div>
                               <div className="d-flex justify-content-between align-items-center mt-5">

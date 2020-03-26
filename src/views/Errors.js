@@ -187,7 +187,7 @@ class Errors extends Component {
                   <Card className="mb-4 nana" >
                       <CardBody  className="border-bottom" style={{ padding: 24,borderRadius: 6}}>
                         <div className="d-flex justify-content-between" style={{alignItems: 'center'}}>
-                            <h6 className="mb-0 " style={{color: '#3d5170', fontWeight: '600'}}>{item.bab}</h6>
+                            <h6 className="mb-0 max-length " style={{color: '#3d5170', fontWeight: '600'}}>{item.bab}</h6>
                         </div>
                         <div className="d-flex align-items-center justify-content-between mt-5">
                           <a cl onClick={() => this.toDetail(item._id)} href="#">

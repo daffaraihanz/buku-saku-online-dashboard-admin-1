@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody,Button,ListGroup,ListGroupItem,Form,FormInput,CardFooter } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import axios from 'axios'
@@ -52,32 +52,28 @@ class RiwayatPelanggaran extends Component{
                     <PageTitle sm="4" title="Riwayat Pelanggaran" subtitle="Buku Saku Online" className="text-sm-left" />
                  </Row>
                     <Row className="mb-4">
-                        {this.state.data.map((item,key) => {
-                            return(
-                        <Col lg="5" className="mb-4">
-                            <Card small className="blog-comments nana">
-                                <CardBody className="p-3">
-                                    <div className="">
-                                        {/* Avatar */}
-                                            <div className="blog-comments__avatar d-flex" style={{position: 'relative'}}>
-                                                <img className="mr-3" src={`http://${item.image}`} alt="" />
-                                                <div>
-                                                    <h5 className="mb-1">{item.user.nama}</h5>
-                                                    <p style={{fontWeight: 300}} className="mb-4">{item.pelanggaran.kategori}</p>
-                                                    <div className="d-flex justify-content-between">
-                                                        <a onClick={() => this.toDetailRiwayat(item._id)} className="mr-3" href="#">Lihat Detail</a>
-                                                        <p style={{position: 'absolute',right: 0}} className="mb-1 ">{item.createdDate}</p>
-                                                    </div>
+                            {this.state.data.map((item,key) => {
+                                return(
+                                    <Fragment>
+                                        <Col lg="3" className="mb-4" >
+                                            <div className="card card-size riwayat-height nana">
+                                                <img className="card-img-top card-image" src={`http://${item.image}`}></img>
+                                                <div className="card-body">
+                                                    <p className="card-name max-length">{item.user.nama}</p>
+                                                    <small className="mb-1">{item.createdDate}</small>
+                                                    <p className="card-desc max-length">
+                                                    {item.pelanggaran.kategori}
+                                                    </p>
+                                                    <a onClick={() => this.toDetailRiwayat(item._id)} className="mr-3 mb-5" href="#">Lihat Detail</a>
                                                 </div>
                                             </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        )
-                        })}
-
-                    </Row>
+                                        </Col>
+                                    </Fragment>
+                            )
+                            })}
+                        </Row>
+                    <Row>
+                </Row>
             </Container>
         )
     }
